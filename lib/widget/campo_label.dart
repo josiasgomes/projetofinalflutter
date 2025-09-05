@@ -26,11 +26,13 @@ class CampoLabel extends StatelessWidget {
           width: 330,
           decoration: BoxDecoration(
             color: Color(0xffFFFFFF),
+            borderRadius: BorderRadius.circular(30.0),
             boxShadow: [
               BoxShadow(
-                color: Colors.black,
-                offset: Offset(0, 8),
-                blurRadius: 10,
+                color: Colors.black.withAlpha(50),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: const Offset(0, 3),
               ),
             ],
           ),
