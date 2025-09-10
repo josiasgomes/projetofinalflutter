@@ -23,6 +23,7 @@ class CadastroClientes extends StatelessWidget {
             //CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
             children: [
               CampoLabel(label: "Nome completo:", placeholder: "digite aqui..."),
+              SizedBox(height: 10),
               CampoLabel(label: "CPF/CNPJ:", placeholder: "digite aqui..."),
           
           ]//ATÉ AQUI - CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
