@@ -10,7 +10,7 @@ class CadastroClientes extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Cadastro de Clientes', style: TextStyle(
           color: Color.fromARGB(255, 177, 17, 188),
-          fontSize: 20,
+          fontSize: 14,
           fontWeight: FontWeight.bold,
           fontFamily: 'Roboto'
         ),),
@@ -23,9 +23,18 @@ class CadastroClientes extends StatelessWidget {
             //CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
             children: [
               CampoLabel(label: "Nome completo:", placeholder: "digite aqui..."),
-              SizedBox(height: 10),
+              SizedBox(height: 8),
               CampoLabel(label: "CPF/CNPJ:", placeholder: "digite aqui..."),
-          
+              SizedBox(height: 8),
+              CampoLabel(label: "Telefone:", placeholder: "digite aqui..."),
+              SizedBox(height: 8),
+              CampoLabel(label: "Email:", placeholder: "digite aqui..."),
+              SizedBox(height: 8),
+              CampoLabel(label: "Endereço:", placeholder: "digite aqui..."),
+              SizedBox(height: 8),
+              CampoLabel(label: "CEP:", placeholder: "digite aqui..."),
+              SizedBox(height: 8),
+              CampoLabel(label: "Cidade:", placeholder: "digite aqui..."),
           ]//ATÉ AQUI - CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
                 ),
         ),
