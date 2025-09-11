@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/widget/barra_navegacao.dart';
 import 'package:myapp/widget/campo_label.dart';
 
 class CadastroClientes extends StatelessWidget {
@@ -10,7 +11,7 @@ class CadastroClientes extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Cadastro de Clientes', style: TextStyle(
           color: Color.fromARGB(255, 177, 17, 188),
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
           fontFamily: 'Roboto'
         ),),
@@ -19,7 +20,7 @@ class CadastroClientes extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
-          child: Column(
+          child: ListView(
             //CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
             children: [
               CampoLabel(label: "Nome completo:", placeholder: "digite aqui..."),
@@ -35,8 +36,15 @@ class CadastroClientes extends StatelessWidget {
               CampoLabel(label: "CEP:", placeholder: "digite aqui..."),
               SizedBox(height: 8),
               CampoLabel(label: "Cidade:", placeholder: "digite aqui..."),
-          ]//ATÉ AQUI - CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
-                ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  BarraNavegacao(label: "Salvar"),
+                ]
+              ),
+          ],
+          //ATÉ AQUI - CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
+           ),
         ),
       )
     );
