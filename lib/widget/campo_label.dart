@@ -24,10 +24,10 @@ class CampoLabel extends StatelessWidget {
         const SizedBox(height: 6),
         Container(
           width: 330,
-          height: 30,
+          height: 50,
           decoration: BoxDecoration(
             color: Color(0xffFFFFFF),
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(50.0),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withAlpha(50),
@@ -40,7 +40,7 @@ class CampoLabel extends StatelessWidget {
           child: TextField(
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30.0),
+                borderRadius: BorderRadius.circular(50.0),
               ),
               labelText: placeholder,
               labelStyle: const TextStyle(color: Color(0xffC0C0C0)),
