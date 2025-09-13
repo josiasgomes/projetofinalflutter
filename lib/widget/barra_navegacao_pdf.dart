@@ -10,7 +10,7 @@ class BarraNavegacaoPdf extends StatelessWidget {
     return Column(
       children: [
         IconButton(
-          icon: const Icon(Icons.save),
+          icon: const Icon(Icons.picture_as_pdf),
           color: Color(0xff000000),
           iconSize: 50,
           onPressed: () {

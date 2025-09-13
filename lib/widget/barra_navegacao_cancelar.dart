@@ -10,7 +10,7 @@ class BarraNavegacaoCancelar extends StatelessWidget {
     return Column(
       children: [
         IconButton(
-          icon: const Icon(Icons.save),
+          icon: const Icon(Icons.cancel),
           color: Color(0xff000000),
           iconSize: 50,
           onPressed: () {
