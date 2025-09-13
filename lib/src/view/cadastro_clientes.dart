@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/widget/barra_navegacao.dart';
+import 'package:myapp/widget/barra_navegacao_cancelar.dart';
+import 'package:myapp/widget/barra_navegacao_pdf.dart';
 import 'package:myapp/widget/campo_label.dart';
 
 class CadastroClientes extends StatelessWidget {
@@ -38,8 +40,11 @@ class CadastroClientes extends StatelessWidget {
               CampoLabel(label: "Cidade:", placeholder: "digite aqui..."),
               SizedBox(height: 20),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  BarraNavegacao(label: "Salvar"),
+                  BarraNavegacaoSalvar(label: "Salvar"),
+                  BarraNavegacaoCancelar(label: "Cancelar"),
+                  BarraNavegacaoPdf(label: "Gerar PDF")
                 ]
               ),
           ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class BarraNavegacaoSalvar extends StatelessWidget {
+class BarraNavegacaoPdf extends StatelessWidget {
   final String label;
 
-  const BarraNavegacaoSalvar({Key? key, required this.label}) : super(key: key);
+  const BarraNavegacaoPdf({Key? key, required this.label}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

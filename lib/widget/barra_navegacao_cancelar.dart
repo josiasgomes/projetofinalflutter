@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class BarraNavegacaoSalvar extends StatelessWidget {
+class BarraNavegacaoCancelar extends StatelessWidget {
   final String label;
 
-  const BarraNavegacaoSalvar({Key? key, required this.label}) : super(key: key);
+  const BarraNavegacaoCancelar({Key? key, required this.label}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
