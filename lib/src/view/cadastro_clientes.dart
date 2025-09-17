@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/widget/app_bar.dart';
-import 'package:myapp/widget/barra_navegacao.dart';
-import 'package:myapp/widget/barra_navegacao_cancelar.dart';
-import 'package:myapp/widget/barra_navegacao_pdf.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
 import 'package:myapp/widget/campo_label.dart';
+import 'package:myapp/widget/linha_icones.dart';
 
 class CadastroClientes extends StatelessWidget {
   const CadastroClientes({super.key});
@@ -38,11 +36,12 @@ class CadastroClientes extends StatelessWidget {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  BarraNavegacaoSalvar(label: "Salvar"),
-                  BarraNavegacaoCancelar(label: "Cancelar"),
-                  BarraNavegacaoPdf(label: "Gerar PDF")
+                  LinhaIcones(label: "Salvar", icon: Icons.save),
+                  LinhaIcones(label: "Cancelar", icon: Icons.cancel),
+                  LinhaIcones(label: "Gerar PDF", icon: Icons.picture_as_pdf)
                 ]
               ),
+              SizedBox(height: 30),
           ],
           //ATÉ AQUI - CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
            ),
