@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/authenticate.dart';
 
-class Authwrapper extends StatelessWidget {
-  const Authwrapper({super.key});
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({super.key});
 
   @override
   Widget build(BuildContext context) {

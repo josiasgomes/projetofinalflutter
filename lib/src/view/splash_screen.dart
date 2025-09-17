@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/src/core/auth_wrapper.dart';
 import 'package:myapp/src/view/login_screen.dart';
 
 class SplashPage extends StatefulWidget {
@@ -16,9 +17,7 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(const Duration(seconds: 3), () {
       // Após o tempo, navega para a tela de login
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
-        ),
+        MaterialPageRoute(builder: (context) => const AuthWrapper()),
       );
     });
   }
@@ -36,9 +35,11 @@ class _SplashPageState extends State<SplashPage> {
               'assets/logo.png', // Verifique se o caminho está correto
               height: 150, // Altura ajustada para ser similar à imagem
             ),
-            const SizedBox(height: 10), // Pequeno espaço entre a imagem e o texto
+            const SizedBox(
+              height: 10,
+            ), // Pequeno espaço entre a imagem e o texto
+
             // Texto "OrçaPro" estilizado
-          
           ],
         ),
       ),
