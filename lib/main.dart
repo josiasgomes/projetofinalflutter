@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:myapp/firebase_options.dart';
 import 'package:myapp/src/view/cadastro_clientes.dart';
+import 'package:myapp/src/view/materiais_e_servicos.dart';
 import 'package:myapp/src/view/splash_screen.dart';
 
 
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: CadastroClientes(),
+      home: //MateriaisEServicosPage(),
+            CadastroClientes(),
     );
   }
 }

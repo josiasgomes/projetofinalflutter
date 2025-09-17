@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/widget/barra_navegacao.dart';
-import 'package:myapp/widget/barra_navegacao_cancelar.dart';
-import 'package:myapp/widget/barra_navegacao_pdf.dart';
+import 'package:myapp/widget/linha_icones.dart';
+import 'package:myapp/widget/barra_navegacao_principal.dart';
 import 'package:myapp/widget/campo_label.dart';
 
 class CadastroClientes extends StatelessWidget {
@@ -39,19 +38,31 @@ class CadastroClientes extends StatelessWidget {
               SizedBox(height: 8),
               CampoLabel(label: "Cidade:", placeholder: "digite aqui..."),
               SizedBox(height: 20),
-              Row(
+Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  BarraNavegacaoSalvar(label: "Salvar"),
-                  BarraNavegacaoCancelar(label: "Cancelar"),
-                  BarraNavegacaoPdf(label: "Gerar PDF")
+                  LinhaIcones(label: "Salvar", icon: Icons.save),
+                  LinhaIcones(label: "Cancelar", icon: Icons.cancel),
+                  LinhaIcones(label: "Gerar PDF", icon: Icons.picture_as_pdf)
                 ]
               ),
+              SizedBox(height: 30),
           ],
           //ATÉ AQUI - CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
            ),
         ),
-      )
+      ),
+      
+
+            floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue.shade900,
+        onPressed: () {
+          // Ação ao pressionar o botão "+"
+        },
+        child: Icon(Icons.add, size: 32, color: Colors.white),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BarraNavegacaoPrincipal()
     );
   }
 }
