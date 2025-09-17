@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/barra_navegacao.dart';
 import 'package:myapp/widget/barra_navegacao_cancelar.dart';
 import 'package:myapp/widget/barra_navegacao_pdf.dart';
+import 'package:myapp/widget/barra_navegacao_principal.dart';
 import 'package:myapp/widget/campo_label.dart';
 
 class CadastroClientes extends StatelessWidget {
@@ -10,14 +12,8 @@ class CadastroClientes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cadastro de Clientes', style: TextStyle(
-          color: Color.fromARGB(255, 177, 17, 188),
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Roboto'
-        ),),
-        centerTitle: true,
+      appBar: const CustomAppBar(
+        title: 'Cadastrar Cliente',
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -26,20 +22,20 @@ class CadastroClientes extends StatelessWidget {
             //CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
             children: [
               CampoLabel(label: "Nome completo:", placeholder: "digite aqui..."),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CampoLabel(label: "CPF/CNPJ:", placeholder: "digite aqui..."),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CampoLabel(label: "Telefone:", placeholder: "digite aqui..."),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CampoLabel(label: "Email:", placeholder: "digite aqui..."),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CampoLabel(label: "Endereço:", placeholder: "digite aqui..."),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CampoLabel(label: "CEP:", placeholder: "digite aqui..."),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CampoLabel(label: "Cidade:", placeholder: "digite aqui..."),
-              SizedBox(height: 20),
-              Row(
+              const SizedBox(height: 20),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   BarraNavegacaoSalvar(label: "Salvar"),
@@ -51,7 +47,8 @@ class CadastroClientes extends StatelessWidget {
           //ATÉ AQUI - CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
            ),
         ),
-      )
+      ),
+      bottomNavigationBar: BarraNavegacaoPrincipal(),
     );
   }
 }

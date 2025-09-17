@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/widget/nav_bar.dart';
+import 'package:myapp/widget/app_bar.dart';
+import 'package:myapp/widget/barra_navegacao_principal.dart';
 
 class ClientsListScreen extends StatelessWidget {
   const ClientsListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return NavBar(
-      title: 'Clientes Cadastrados',
+    return Scaffold(
+      appBar: const CustomAppBar(
+        title: 'Clientes',
+        automaticallyImplyLeading: true, // No back button on this screen
+      ),
       body: ListView.builder(
         itemCount: 6, // Este número será dinâmico, vindo do banco de dados
         itemBuilder: (context, index) {
@@ -42,6 +46,7 @@ class ClientsListScreen extends StatelessWidget {
           );
         },
       ),
+      bottomNavigationBar: BarraNavegacaoPrincipal(),
     );
   }
 }
