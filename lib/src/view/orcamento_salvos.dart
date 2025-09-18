@@ -68,7 +68,16 @@ body: Padding(
 
         const SizedBox(height: 8),
 
-        
+//CARD
+        Card(elevation: 10),
+        const SizedBox(height: 8),
+        Card(elevation: 10),
+        const SizedBox(height: 8),
+        Card(elevation: 10),
+        const SizedBox(height: 8),
+
+//ENCERRA CARD
+
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
