@@ -1,20 +1,24 @@
 // ignore_for_file: avoid_print
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/src/core/auth_service.dart';
 
-class RegisterScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   final VoidCallback toggleView;
 
-  const RegisterScreen({required this.toggleView, super.key});
+  const LoginScreen({required this.toggleView, super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   // 1. Cria os controladores para os campos de texto
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  String errorMessage = '';
 
   // 2. Limpa os controladores quando o widget é descartado
   @override
@@ -25,15 +29,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   // Função para simular o login
-  void _login() {
+  void _login() async {
     // 3. Acessa os valores digitados usando os controladores
     final email = _emailController.text;
     final password = _passwordController.text;
 
-    // Lógica de autenticação
-    print('Email: $email');
-    print('Senha: $password');
     // Adicionar aqui a lógica real para validar e logar o usuário
+    try {
+      await authService.value.signIn(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message ?? 'Erro desconhecido';
+      });
+    }
   }
 
   @override
@@ -47,7 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text("Registro"),
+                Text("Login"),
 
                 const SizedBox(height: 16.0),
 
@@ -90,29 +98,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 24.0),
 
                 ElevatedButton(
                   onPressed:
                       _login, // 6. Chama a função _login ao pressionar o botão
                   style: ElevatedButton.styleFrom(
-                    fixedSize: Size(200.0, 60.0),
                     backgroundColor: Colors.blue,
+                    fixedSize: Size(200.0, 60.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                   ),
                   child: const Text(
-                    'Registrar-se',
+                    'Login',
                     style: TextStyle(fontSize: 18.0, color: Colors.white),
                   ),
                 ),
 
                 TextButton(
                   onPressed: widget.toggleView,
-                  child: const Text("Já possui uma conta? Clique aqui"),
+                  child: Text("Não possui uma conta? Clique aqui"),
                 ),
               ],
             ),
