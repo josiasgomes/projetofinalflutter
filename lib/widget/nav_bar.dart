@@ -5,8 +5,7 @@ import 'package:myapp/widget/barra_navegacao_principal.dart';
 class NavBar extends StatelessWidget {
   final Widget body;
   final String title;
-
-  const NavBar({super.key, required this.body, required this.title});
+const NavBar({super.key, required this.body, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +30,6 @@ class NavBar extends StatelessWidget {
         },
         onListPressed: () {
           // Lógica para ir para Orçamentos
-        },
-        onNotificationsPressed: () {
-          // Lógica para ir para Notificações
-        },
-        onSettingsPressed: () {
-          // Lógica para ir para Configurações
         },
       ),
     );

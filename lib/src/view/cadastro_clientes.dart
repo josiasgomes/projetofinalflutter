@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/widget/linha_icones.dart';
+import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
 import 'package:myapp/widget/campo_label.dart';
+import 'package:myapp/widget/linha_icones.dart';
 
 class CadastroClientes extends StatelessWidget {
   const CadastroClientes({super.key});
@@ -9,14 +10,9 @@ class CadastroClientes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cadastro de Clientes', style: TextStyle(
-          color: Color.fromARGB(255, 177, 17, 188),
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Roboto'
-        ),),
-        centerTitle: true,
+      appBar: const CustomAppBar(
+        title: 'Cadastro de Clientes',
+        automaticallyImplyLeading: true, // No back button on this screen
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -25,20 +21,20 @@ class CadastroClientes extends StatelessWidget {
             //CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
             children: [
               CampoLabel(label: "Nome completo:", placeholder: "digite aqui..."),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CampoLabel(label: "CPF/CNPJ:", placeholder: "digite aqui..."),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CampoLabel(label: "Telefone:", placeholder: "digite aqui..."),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CampoLabel(label: "Email:", placeholder: "digite aqui..."),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CampoLabel(label: "Endereço:", placeholder: "digite aqui..."),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CampoLabel(label: "CEP:", placeholder: "digite aqui..."),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CampoLabel(label: "Cidade:", placeholder: "digite aqui..."),
-              SizedBox(height: 20),
-Row(
+              const SizedBox(height: 20),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   LinhaIcones(label: "Salvar", icon: Icons.save),
@@ -52,17 +48,7 @@ Row(
            ),
         ),
       ),
-      
-
-            floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue.shade900,
-        onPressed: () {
-          // Ação ao pressionar o botão "+"
-        },
-        child: Icon(Icons.add, size: 32, color: Colors.white),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BarraNavegacaoPrincipal()
+      bottomNavigationBar: BarraNavegacaoPrincipal(),
     );
   }
 }
