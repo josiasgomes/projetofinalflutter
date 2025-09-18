@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/widget/app_bar.dart';
-import 'package:myapp/widget/linha_icones.dart';
-import 'package:myapp/widget/barra_navegacao_principal.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -17,14 +14,28 @@ class MateriaisEServicosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Materiais e Serviços',
-        automaticallyImplyLeading: true, // No back button on this screen
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.purple),
+          onPressed: () {},
+        ),
+        title: Text(
+          'Materiais e Serviços',
+          style: TextStyle(color: Colors.purple),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 12.0),
+            child: CircleAvatar(
+              radius: 16,
+              backgroundImage: AssetImage('assets/avatar.png'), // substitua com imagem local
+            ),
+          ),
+        ],
       ),
-
-
-//INICIO BODY
-
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -65,23 +76,34 @@ class MateriaisEServicosPage extends StatelessWidget {
                 ),
               ),
             ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  LinhaIcones(label: "Salvar", icon: Icons.save),
-                  LinhaIcones(label: "Cancelar", icon: Icons.cancel),
-                  LinhaIcones(label: "Gerar PDF", icon: Icons.picture_as_pdf)
-                ]
-              ),
-              SizedBox(height: 30),
           ],
         ),
       ),
-
-
-//ENCERRA O BODY
-
-      bottomNavigationBar: BarraNavegacaoPrincipal()
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue.shade900,
+        onPressed: () {
+          // Ação ao pressionar o botão "+"
+        },
+        child: Icon(Icons.add, size: 32),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 8.0,
+        child: BottomNavigationBar(
+          backgroundColor: Colors.white,
+          selectedItemColor: Colors.purple,
+          unselectedItemColor: Colors.grey,
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.edit), label: ''),
+          ],
+          currentIndex: 0,
+          onTap: (index) {
+            // Navegação entre abas
+          },
+        ),
+      ),
     );
   }
 }
