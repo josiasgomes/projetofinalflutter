@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
+import 'package:myapp/widget/filtro_orcamentos.dart';
 //import 'package:myapp/widget/campo_label.dart';
 import 'package:myapp/widget/linha_icones.dart';
 
@@ -63,6 +64,11 @@ body: Padding(
 
         const SizedBox(height: 8),
 
+        FiltrandoOrcamentos(),
+
+        const SizedBox(height: 8),
+
+        
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
