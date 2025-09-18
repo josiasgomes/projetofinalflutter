@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/linha_icones.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
 
@@ -16,27 +17,9 @@ class MateriaisEServicosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.purple),
-          onPressed: () {},
-        ),
-        title: Text(
-          'Materiais e Serviços',
-          style: TextStyle(color: Colors.purple),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12.0),
-            child: CircleAvatar(
-              radius: 16,
-              backgroundImage: AssetImage('assets/avatar.png'), // substitua com imagem local
-            ),
-          ),
-        ],
+      appBar: const CustomAppBar(
+        title: 'Materiais e Serviços',
+        automaticallyImplyLeading: true, // No back button on this screen
       ),
 
 
@@ -98,14 +81,6 @@ class MateriaisEServicosPage extends StatelessWidget {
 
 //ENCERRA O BODY
 
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue.shade900,
-        onPressed: () {
-          // Ação ao pressionar o botão "+"
-        },
-        child: Icon(Icons.add, size: 32, color: Colors.white),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BarraNavegacaoPrincipal()
     );
   }

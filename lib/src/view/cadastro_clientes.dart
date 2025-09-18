@@ -11,7 +11,8 @@ class CadastroClientes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
-        title: 'Cadastrar Cliente',
+        title: 'Cadastro de Clientes',
+        automaticallyImplyLeading: true, // No back button on this screen
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
