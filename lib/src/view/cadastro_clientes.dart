@@ -39,7 +39,7 @@ class CadastroClientes extends StatelessWidget {
                 children: [
                   LinhaIcones(label: "Salvar", icon: Icons.save),
                   LinhaIcones(label: "Cancelar", icon: Icons.cancel),
-                  LinhaIcones(label: "Gerar PDF", icon: Icons.picture_as_pdf)
+                  //LinhaIcones(label: "Gerar PDF", icon: Icons.picture_as_pdf)
                 ]
               ),
               SizedBox(height: 30),
