@@ -98,7 +98,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 24.0),
+
+                if (errorMessage != '')
+                  Text(errorMessage, style: const TextStyle(color: Colors.red)),
 
                 ElevatedButton(
                   onPressed:
