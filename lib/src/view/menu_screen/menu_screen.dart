@@ -1,9 +1,20 @@
+import 'dart:math';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/auth_service.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({Key? key}) : super(key: key);
+
+  void _signOut() async {
+    try {
+      await authService.value.signOut();
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +100,7 @@ class MenuScreen extends StatelessWidget {
               context,
               icon: Icons.exit_to_app,
               text: 'Sair',
-              onTap: authService.value.signOut,
+              onTap: _signOut,
 
               //sair do app
             ),
