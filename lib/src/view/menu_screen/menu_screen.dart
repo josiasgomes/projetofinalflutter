@@ -1,8 +1,20 @@
+import 'dart:math';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/src/core/auth_service.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({Key? key}) : super(key: key);
+
+  void _signOut() async {
+    try {
+      await authService.value.signOut();
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +96,14 @@ class MenuScreen extends StatelessWidget {
                 // Navegar para a tela de Relatórios
               },
             ),
+            _buildMenuItem(
+              context,
+              icon: Icons.exit_to_app,
+              text: 'Sair',
+              onTap: _signOut,
+
+              //sair do app
+            ),
           ],
         ),
       ),
@@ -93,26 +113,25 @@ class MenuScreen extends StatelessWidget {
         backgroundColor: Colors.blue,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BarraNavegacaoPrincipal()
+      bottomNavigationBar: BarraNavegacaoPrincipal(),
     );
   }
 
-  Widget _buildMenuItem(BuildContext context, {required IconData icon, required String text, required VoidCallback onTap}) {
+  Widget _buildMenuItem(
+    BuildContext context, {
+    required IconData icon,
+    required String text,
+    required VoidCallback onTap,
+  }) {
     return InkWell(
       onTap: onTap,
       child: Card(
         elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 48,
-              color: Colors.blue,
-            ),
+            Icon(icon, size: 48, color: Colors.blue),
             const SizedBox(height: 8),
             Text(
               text,
