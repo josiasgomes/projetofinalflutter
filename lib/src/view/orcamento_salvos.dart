@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
+import 'package:myapp/widget/filtro_orcamentos.dart';
 //import 'package:myapp/widget/campo_label.dart';
 import 'package:myapp/widget/linha_icones.dart';
 
@@ -62,6 +63,33 @@ body: Padding(
         ),
 
         const SizedBox(height: 8),
+
+        FiltrandoOrcamentos(),
+
+        const SizedBox(height: 8),
+
+//CARD
+        Card(
+          elevation: 5,
+          color: const Color.fromARGB(255, 255, 255, 255),
+          shadowColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            side: const BorderSide(color: Color(0xffAE11BC), width: 1.0),
+          ),
+          child: Container(
+            width: 330,
+            height: 150,
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start
+            )
+          )
+        ),
+        const SizedBox(height: 8),
+        
+
+//ENCERRA CARD
 
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
