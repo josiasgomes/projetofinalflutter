@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/widget/barra_navegacao_principal.dart';
 
-void main() {
+/*void main() {
   runApp(MaterialApp(
     home: MateriaisEServicosPage(),
     debugShowCheckedModeBanner: false,
   ));
-}
+}*/
 
 class MateriaisEServicosPage extends StatelessWidget {
   final TextEditingController materiaisController = TextEditingController();
@@ -79,31 +80,7 @@ class MateriaisEServicosPage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue.shade900,
-        onPressed: () {
-          // Ação ao pressionar o botão "+"
-        },
-        child: Icon(Icons.add, size: 32),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 8.0,
-        child: BottomNavigationBar(
-          backgroundColor: Colors.white,
-          selectedItemColor: Colors.purple,
-          unselectedItemColor: Colors.grey,
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.edit), label: ''),
-          ],
-          currentIndex: 0,
-          onTap: (index) {
-            // Navegação entre abas
-          },
-        ),
-      ),
-    );
+    bottomNavigationBar: BarraNavegacaoPrincipal(),
+    ); //Scaffold
   }
 }

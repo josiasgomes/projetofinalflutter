@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:myapp/src/view/criar_orcamentos.dart';
+import 'package:myapp/src/view/menu_screen/menu_screen.dart';
 
 class BarraNavegacaoPrincipal extends StatelessWidget {
   const BarraNavegacaoPrincipal({
@@ -33,9 +35,14 @@ class BarraNavegacaoPrincipal extends StatelessWidget {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.home_outlined, color: roxoPrincipal, size: 30),
-                    onPressed: onHomePressed,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MenuScreen()),
+                      );
+                    },
                     tooltip: 'Início',
-                  ),
+                  )
                 ],
               ),
             ),
@@ -47,9 +54,14 @@ class BarraNavegacaoPrincipal extends StatelessWidget {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.edit_document, color: roxoPrincipal, size: 30),
-                    onPressed: onListPressed,
-                    tooltip: 'Orçamentos',
-                  ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FazerOrcamentos()),
+                      );
+                    },
+                    tooltip: 'Início',
+                  )
                 ],
               ),
             ),
