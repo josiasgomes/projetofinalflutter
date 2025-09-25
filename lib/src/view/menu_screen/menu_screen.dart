@@ -1,8 +1,8 @@
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/auth_service.dart';
+import 'package:myapp/src/view/cadastro_clientes.dart';
+import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -19,28 +19,11 @@ class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Página Inicial',
-          style: TextStyle(color: Colors.purple),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: () {
-              // Ação do botão do perfil
-            },
-            icon: const CircleAvatar(
-              backgroundColor: Colors.blue, // Cor de fundo do círculo
-              child: Icon(
-                Icons.person, // Ícone de pessoa
-                color: Colors.white, // Cor do ícone
-              ),
-            ),
-          ),
-        ],
+      appBar: const CustomAppBar(
+        title: 'Menu',
+        automaticallyImplyLeading: true, // No back button on this screen
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GridView.count(
@@ -53,6 +36,10 @@ class MenuScreen extends StatelessWidget {
               icon: Icons.person_add,
               text: 'Cadastro de Cliente',
               onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CadastroClientes()),
+                );
                 // Navegar para a tela de Cadastro de Cliente
               },
             ),
