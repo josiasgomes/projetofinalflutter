@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/theme/app_colors.dart';
 import 'package:myapp/src/view/criar_orcamentos.dart';
@@ -16,54 +15,59 @@ class BarraNavegacaoPrincipal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color roxoPrincipal = Color(0xFF6A1B9A);
+    // 1. Obter as dimensões da tela para responsividade.
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // 2. Definir tamanhos responsivos AUMENTADOS:
+    // Altura da barra: 6% da largura da tela (era 5%).
+    final double barHeight = screenWidth * 0.09; 
+    // Tamanho dos ícones: 90% da altura da barra (era 80%).
+    final double iconSize = barHeight * 1.0; 
 
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
       notchMargin: 8.0,
-      color: Colors.white,
+      color: Colors.white, 
       elevation: 12.0,
-      child: SizedBox(
-        height: 30.0,
+      
+      child: Padding(
+        // Centraliza os ícones verticalmente.
+        padding: EdgeInsets.symmetric(vertical: (barHeight - iconSize) / 2), 
+        
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            // Ícones da Esquerda
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 2 - 40,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.home_outlined, color: AppColors.primary, size: 30),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MenuScreen()),
-                      );
-                    },
-                    tooltip: 'Início',
-                  )
-                ],
+            // Ícone 1 (Início)
+            Flexible(
+              child: IconButton(
+                // Ícone com tamanho responsivo maior
+                icon: Icon(Icons.home_outlined, color: AppColors.primary, size: iconSize), 
+                padding: EdgeInsets.zero, 
+                constraints: const BoxConstraints(), 
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MenuScreen()),
+                  );
+                },
+                tooltip: 'Início',
               ),
             ),
-            // Ícones da Direita
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 2 - 40,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit_document, color: AppColors.primary, size: 30),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => FazerOrcamentos()),
-                      );
-                    },
-                    tooltip: 'Início',
-                  )
-                ],
+            
+            // Ícone 2 (Orçamentos)
+            Flexible(
+              child: IconButton(
+                // Ícone com tamanho responsivo maior
+                icon: Icon(Icons.edit_document, color: AppColors.primary, size: iconSize), 
+                padding: EdgeInsets.zero, 
+                constraints: const BoxConstraints(), 
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FazerOrcamentos()),
+                  );
+                },
+                tooltip: 'Orçamentos',
               ),
             ),
           ],
