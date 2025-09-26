@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:myapp/src/core/theme/app_colors.dart';
 import 'package:myapp/src/view/criar_orcamentos.dart';
 import 'package:myapp/src/view/menu_screen/menu_screen.dart';
 
@@ -23,7 +24,7 @@ class BarraNavegacaoPrincipal extends StatelessWidget {
       color: Colors.white,
       elevation: 12.0,
       child: SizedBox(
-        height: 60.0,
+        height: 30.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -34,7 +35,7 @@ class BarraNavegacaoPrincipal extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.home_outlined, color: roxoPrincipal, size: 30),
+                    icon: const Icon(Icons.home_outlined, color: AppColors.primary, size: 30),
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -53,7 +54,7 @@ class BarraNavegacaoPrincipal extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.edit_document, color: roxoPrincipal, size: 30),
+                    icon: const Icon(Icons.edit_document, color: AppColors.primary, size: 30),
                     onPressed: () {
                       Navigator.push(
                         context,

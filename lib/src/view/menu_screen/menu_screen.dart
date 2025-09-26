@@ -1,7 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/auth_service.dart';
+import 'package:myapp/src/core/theme/app_colors.dart';
 import 'package:myapp/src/view/cadastro_clientes.dart';
+import 'package:myapp/src/view/clients_screen.dart/clients_screen.dart';
+import 'package:myapp/src/view/criar_orcamentos.dart';
+import 'package:myapp/src/view/materiais_e_servicos.dart';
+import 'package:myapp/src/view/orcamento_salvos.dart';
 import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
 
@@ -18,16 +23,24 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 1. Obter a largura da tela com MediaQuery
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // 2. Determinar o número de colunas com base na largura da tela
+    // Se a tela for menor que 600 pixels (típico de celulares), usa 2 colunas.
+    // Se for maior, usa 4 colunas (bom para tablets e web).
+    final crossAxisCount = screenWidth < 600 ? 2 : 4;
+
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'Menu',
-        automaticallyImplyLeading: true, // No back button on this screen
+        automaticallyImplyLeading: false,
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(16.0),
+        // 3. Usar a contagem de colunas dinâmica
         child: GridView.count(
-          crossAxisCount: 2,
+          crossAxisCount: crossAxisCount,
           crossAxisSpacing: 16.0,
           mainAxisSpacing: 16.0,
           children: [
@@ -40,7 +53,6 @@ class MenuScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => CadastroClientes()),
                 );
-                // Navegar para a tela de Cadastro de Cliente
               },
             ),
             _buildMenuItem(
@@ -48,7 +60,10 @@ class MenuScreen extends StatelessWidget {
               icon: Icons.list_alt,
               text: 'Clientes cadastrados',
               onTap: () {
-                // Navegar para a tela de Clientes cadastrados
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ClientsListScreen()),
+                );
               },
             ),
             _buildMenuItem(
@@ -56,7 +71,10 @@ class MenuScreen extends StatelessWidget {
               icon: Icons.monetization_on,
               text: 'Fazer orçamento',
               onTap: () {
-                // Navegar para a tela de Fazer orçamento
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FazerOrcamentos()),
+                );
               },
             ),
             _buildMenuItem(
@@ -64,7 +82,10 @@ class MenuScreen extends StatelessWidget {
               icon: Icons.trending_up,
               text: 'Orçamentos salvos',
               onTap: () {
-                // Navegar para a tela de Orçamentos salvos
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => OrcamentosSalvos()),
+                );
               },
             ),
             _buildMenuItem(
@@ -72,7 +93,10 @@ class MenuScreen extends StatelessWidget {
               icon: Icons.layers,
               text: 'Materiais e serviços',
               onTap: () {
-                // Navegar para a tela de Materiais e serviços
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MateriaisEServicosPage()),
+                );
               },
             ),
             _buildMenuItem(
@@ -80,7 +104,7 @@ class MenuScreen extends StatelessWidget {
               icon: Icons.assignment,
               text: 'Relatórios',
               onTap: () {
-                // Navegar para a tela de Relatórios
+                // Ação para Relatórios
               },
             ),
             _buildMenuItem(
@@ -88,18 +112,10 @@ class MenuScreen extends StatelessWidget {
               icon: Icons.exit_to_app,
               text: 'Sair',
               onTap: _signOut,
-
-              //sair do app
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-        backgroundColor: Colors.blue,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BarraNavegacaoPrincipal(),
     );
   }
@@ -112,14 +128,15 @@ class MenuScreen extends StatelessWidget {
   }) {
     return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 48, color: Colors.blue),
-            const SizedBox(height: 8),
+            Icon(icon, size: 48, color: AppColors.primary),
+            const SizedBox(height: 12),
             Text(
               text,
               textAlign: TextAlign.center,
