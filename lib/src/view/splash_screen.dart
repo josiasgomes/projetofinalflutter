@@ -14,11 +14,14 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     // Inicia um temporizador de 3 segundos (ou o tempo que desejar)
+    // Em lib/src/view/splash_screen.dart
     Future.delayed(const Duration(seconds: 3), () {
-      // Após o tempo, navega para a tela de login
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const AuthWrapper()),
-      );
+      // VERIFICA SE O WIDGET AINDA ESTÁ NA TELA ANTES DE NAVEGAR
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const AuthWrapper()),
+        );
+      }
     });
   }
 
@@ -38,7 +41,6 @@ class _SplashPageState extends State<SplashPage> {
             const SizedBox(
               height: 10,
             ), // Pequeno espaço entre a imagem e o texto
-
             // Texto "OrçaPro" estilizado
           ],
         ),

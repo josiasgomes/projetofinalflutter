@@ -3,6 +3,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/auth_service.dart';
+import 'package:myapp/src/core/theme/app_buttonStyle.dart';
+import 'package:myapp/src/core/theme/app_textStyle.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback toggleView;
@@ -53,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Text("Login"),
 
@@ -84,19 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // 5. Atribui o controlador ao campo de senha
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Senha',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                      borderSide: const BorderSide(
-                        color: Colors.blue,
-                        width: 2.0,
-                      ),
-                    ),
-                  ),
+                  decoration: AppButtonstyle.passwordTextField,
                 ),
 
                 const SizedBox(height: 24.0),
@@ -107,18 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ElevatedButton(
                   onPressed:
                       _login, // 6. Chama a função _login ao pressionar o botão
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    fixedSize: Size(200.0, 60.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  ),
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(fontSize: 18.0, color: Colors.white),
-                  ),
+                  style: AppButtonstyle.elevattedButtonStandart,
+                  child: Text('Login', style: AppTextstyle.clickableButton),
                 ),
 
                 TextButton(

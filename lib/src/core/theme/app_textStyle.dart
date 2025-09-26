@@ -46,4 +46,11 @@ class AppTextstyle {
     fontFamily: "Roboto",
     color: AppColors.text,
   );
+
+  static TextStyle clickableButton = TextStyle(
+    fontSize: 25,
+    fontFamily: "Montserrat",
+    fontWeight: FontWeight.bold,
+    color: AppColors.white,
+  );
 }
