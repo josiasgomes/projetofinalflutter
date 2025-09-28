@@ -6,6 +6,7 @@ class AppTextstyle {
   static TextStyle heading1 = TextStyle(
     fontSize: 30,
     fontFamily: "Otomanopee One",
+    fontWeight: FontWeight.bold,
     color: AppColors.secundary,
   );
 

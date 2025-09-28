@@ -57,7 +57,17 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("Login"),
+                Column(mainAxisAlignment: MainAxisAlignment.center, 
+                crossAxisAlignment: CrossAxisAlignment.center, 
+                children: [
+                  Text('OrçaPro', style: AppTextstyle.heading1),
+
+                  const SizedBox(height: 32.0),  
+
+                  Text('Identifique-se', style: AppTextstyle.heading2),
+
+                  ],
+                ),
 
                 const SizedBox(height: 16.0),
 
@@ -65,31 +75,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   // 4. Atribui o controlador ao campo de e-mail
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                      borderSide: const BorderSide(
-                        color: Colors.blue,
-                        width: 2.0,
-                      ),
-                    ),
-                  ),
+                  decoration: AppButtonStyle.emailTextField,
                 ),
 
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 32.0),
 
                 TextField(
                   // 5. Atribui o controlador ao campo de senha
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: AppButtonstyle.passwordTextField,
+                  decoration: AppButtonStyle.passwordTextField,
                 ),
 
-                const SizedBox(height: 24.0),
+                const SizedBox(height: 32.0),
 
                 if (errorMessage != '')
                   Text(errorMessage, style: const TextStyle(color: Colors.red)),
@@ -97,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ElevatedButton(
                   onPressed:
                       _login, // 6. Chama a função _login ao pressionar o botão
-                  style: AppButtonstyle.elevattedButtonStandart,
+                  style: AppButtonStyle.elevattedButtonStandart,
                   child: Text('Login', style: AppTextstyle.clickableButton),
                 ),
 

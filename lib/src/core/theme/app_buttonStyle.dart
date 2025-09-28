@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/theme/app_colors.dart';
+import 'package:myapp/src/core/theme/app_textStyle.dart';
 
-class AppButtonstyle {
+class AppButtonStyle {
   //Sizes
   static final BorderRadius buttonBorderRadiusStandart = BorderRadius.circular(
     30.0,
@@ -13,15 +14,33 @@ class AppButtonstyle {
   //Buttons
   static InputDecoration passwordTextField = InputDecoration(
                     hintText: 'Senha',
+                    hintStyle: AppTextstyle.textLarge1,
                     border: OutlineInputBorder(
                       borderRadius: buttonBorderRadiusStandart,
+                      borderSide: BorderSide.none,
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: buttonBorderRadiusStandart,
                       borderSide: BorderSide.none,
                       ),
+                    fillColor: AppColors.buttonBg,
+                    filled: true,
                     );
-                  
+
+  static InputDecoration emailTextField = InputDecoration(
+                    hintText: 'Email',
+                    hintStyle: AppTextstyle.textLarge1,
+                    border: OutlineInputBorder(
+                      borderRadius: buttonBorderRadiusStandart,
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: buttonBorderRadiusStandart,
+                      borderSide: BorderSide.none,
+                      ),
+                    fillColor: AppColors.buttonBg,
+                    filled: true,
+                    );          
 
   static ButtonStyle elevattedButtonStandart = ElevatedButton.styleFrom(
     backgroundColor: AppColors.primary,
