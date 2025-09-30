@@ -26,6 +26,8 @@ class _CardOrcamentoState extends State<CardOrcamento> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              // Adicione o conteúdo do Card aqui.
+
               // Adicione os widgets filhos aqui
             ),
           ),
