@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 class CampoLabel extends StatelessWidget {
   final String label;
   final String placeholder;
+  final TextEditingController? controller; // Controlador adicionado
 
-  const CampoLabel({Key? key, required this.label, required this.placeholder})
-    : super(key: key);
+  const CampoLabel({
+    Key? key,
+    required this.label,
+    required this.placeholder,
+    this.controller, // Construtor atualizado
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class CampoLabel extends StatelessWidget {
           width: 330,
           //height: 50,
           decoration: BoxDecoration(
-            color: Color(0xffFFFFFF),
+            color: const Color(0xffFFFFFF),
             borderRadius: BorderRadius.circular(20.0),
             boxShadow: [
               BoxShadow(
@@ -38,6 +43,7 @@ class CampoLabel extends StatelessWidget {
             ],
           ),
           child: TextField(
+            controller: controller, // Controlador atribuído ao campo de texto
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.0),
