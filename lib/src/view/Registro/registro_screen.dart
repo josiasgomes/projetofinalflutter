@@ -19,6 +19,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // 1. Cria os controladores para os campos de texto
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+  
   String errorMessage = '';
 
   // 2. Limpa os controladores quando o widget é descartado
@@ -26,19 +29,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _nameController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
   // Função para simular o login
   void _register() async {
     // 3. Acessa os valores digitados usando os controladores
+    final name = _nameController.text;
     final email = _emailController.text;
     final password = _passwordController.text;
+    final confirmPassword = _confirmPasswordController.text;
+    
 
     // lógica real para registrar o usuário
 
     try {
-      await authService.value.register(email: email, password: password);
+      if (name != '' && password == confirmPassword)
+      {
+        await authService.value.register(email: email, password: password);
+      }
+
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message ?? 'Erro desconhecido';
@@ -67,14 +79,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ],
                 ),
 
-                const SizedBox(height: 10.0),
+                const SizedBox(height: 16.0),
+
+                TextField(
+                  // 4. Atribui o controlador ao campo de e-mail
+                  controller: _nameController,
+                  keyboardType: TextInputType.emailAddress,
+                  obscureText: true,
+                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Nome'),
+                ),
+
+                const SizedBox(height: 32.0),
 
                 TextField(
                   // 4. Atribui o controlador ao campo de e-mail
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   obscureText: true,
-                  decoration: AppButtonStyle.emailTextField,
+                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Email'),
                 ),
 
                 const SizedBox(height: 32.0),
@@ -83,7 +105,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   // 5. Atribui o controlador ao campo de senha
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: AppButtonStyle.passwordTextField,
+                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Senha'),
+                ),
+
+                const SizedBox(height: 32.0),
+
+                TextField(
+                  // 4. Atribui o controlador ao campo de e-mail
+                  controller: _confirmPasswordController,
+                  keyboardType: TextInputType.emailAddress,
+                  obscureText: true,
+                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Confirmar a senha'),
                 ),
 
                 const SizedBox(height: 32.0),

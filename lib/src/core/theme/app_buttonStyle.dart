@@ -9,26 +9,17 @@ class AppButtonStyle {
   );
   static final EdgeInsets buttonPaddingStandart = EdgeInsets.symmetric(
     vertical: 16.0,
+  );        
+
+  static ButtonStyle elevattedButtonStandart = ElevatedButton.styleFrom(
+    backgroundColor: AppColors.primary,
+    shape: RoundedRectangleBorder(borderRadius: buttonBorderRadiusStandart),
+    padding: buttonPaddingStandart,
   );
 
-  //Buttons
-  static InputDecoration passwordTextField = InputDecoration(
-                    hintText: 'Senha',
-                    hintStyle: AppTextstyle.textLarge1,
-                    border: OutlineInputBorder(
-                      borderRadius: buttonBorderRadiusStandart,
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: buttonBorderRadiusStandart,
-                      borderSide: BorderSide.none,
-                      ),
-                    fillColor: AppColors.buttonBg,
-                    filled: true,
-                    );
-
-  static InputDecoration emailTextField = InputDecoration(
-                    hintText: 'Email',
+  static InputDecoration textFieldDecoration({required String hint}) {
+    return InputDecoration(
+                    hintText: hint,
                     hintStyle: AppTextstyle.textLarge1,
                     border: OutlineInputBorder(
                       borderRadius: buttonBorderRadiusStandart,
@@ -41,10 +32,5 @@ class AppButtonStyle {
                     fillColor: AppColors.buttonBg,
                     filled: true,
                     );          
-
-  static ButtonStyle elevattedButtonStandart = ElevatedButton.styleFrom(
-    backgroundColor: AppColors.primary,
-    shape: RoundedRectangleBorder(borderRadius: buttonBorderRadiusStandart),
-    padding: buttonPaddingStandart,
-  );
+  }
 }

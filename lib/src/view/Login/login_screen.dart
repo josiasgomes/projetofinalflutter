@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // 4. Atribui o controlador ao campo de e-mail
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: AppButtonStyle.emailTextField,
+                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Email'),
                 ),
 
                 const SizedBox(height: 32.0),
@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // 5. Atribui o controlador ao campo de senha
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: AppButtonStyle.passwordTextField,
+                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Email'),
                 ),
 
                 const SizedBox(height: 32.0),
