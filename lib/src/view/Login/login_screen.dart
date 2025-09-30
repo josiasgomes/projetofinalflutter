@@ -98,6 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextButton(
                       onPressed: widget.toggleView,

@@ -3,6 +3,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/auth_service.dart';
+import 'package:myapp/src/core/theme/app_buttonStyle.dart';
+import 'package:myapp/src/core/theme/app_textStyle.dart';
 
 class RegisterScreen extends StatefulWidget {
   final VoidCallback toggleView;
@@ -53,75 +55,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("Registro"),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/logo.png', width: 220.0, height: 220.0),
 
-                const SizedBox(height: 16.0),
+                    Text('Identifique-se', style: AppTextstyle.heading2),
+                  ],
+                ),
+
+                const SizedBox(height: 10.0),
 
                 TextField(
                   // 4. Atribui o controlador ao campo de e-mail
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                      borderSide: const BorderSide(
-                        color: Colors.blue,
-                        width: 2.0,
-                      ),
-                    ),
-                  ),
+                  obscureText: true,
+                  decoration: AppButtonStyle.emailTextField,
                 ),
 
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 32.0),
 
                 TextField(
                   // 5. Atribui o controlador ao campo de senha
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Senha',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                      borderSide: const BorderSide(
-                        color: Colors.blue,
-                        width: 2.0,
-                      ),
-                    ),
-                  ),
+                  decoration: AppButtonStyle.passwordTextField,
                 ),
 
-                const SizedBox(height: 24.0),
+                const SizedBox(height: 32.0),
+
+                if (errorMessage != '')
+                  Text(errorMessage, style: const TextStyle(color: Colors.red)),
 
                 ElevatedButton(
                   onPressed:
                       _register, // 6. Chama a registro _register ao pressionar o botão
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(200.0, 60.0),
-                    backgroundColor: Colors.blue,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
+                  style: AppButtonStyle.elevattedButtonStandart,
+                  child: Text('Registrar-se', style: AppTextstyle.clickableButton),
+                  ),
+                  
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      onPressed: widget.toggleView,
+                      child: Text("Já possui uma conta? Clique aqui"),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  ),
-                  child: const Text(
-                    'Registrar-se',
-                    style: TextStyle(fontSize: 18.0, color: Colors.white),
-                  ),
-                ),
-                if (errorMessage != '')
-                  Text(errorMessage, style: const TextStyle(color: Colors.red)),
-                TextButton(
-                  onPressed: widget.toggleView,
-                  child: const Text("Já possui uma conta? Clique aqui"),
+                    Text("Criar conta", style: AppTextstyle.subTitle1),
+                  ],
                 ),
               ],
             ),
