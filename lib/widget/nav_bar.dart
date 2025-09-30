@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/src/view/cadastro_clientes.dart';
+import 'package:myapp/src/view/cadastro_clientes/cadastro_clientes.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
 
 class NavBar extends StatelessWidget {

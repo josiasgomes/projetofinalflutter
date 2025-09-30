@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/auth_service.dart';
 import 'package:myapp/src/core/authenticate.dart';
-import 'package:myapp/src/view/materiais_e_servicos.dart';
+import 'package:myapp/src/view/materiais_e_servicos/materiais_e_servicos.dart';
 import 'package:myapp/src/view/menu_screen/menu_screen.dart';
-import 'package:myapp/src/view/splash_screen.dart';
+import 'package:myapp/src/view/splash_screen/splash_screen.dart';
 
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});
