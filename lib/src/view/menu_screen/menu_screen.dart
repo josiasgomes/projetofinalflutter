@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/auth_service.dart';
 import 'package:myapp/src/core/theme/app_colors.dart';
-import 'package:myapp/src/view/cadastro_clientes/cadastro_clientes.dart';
+import 'package:myapp/src/view/CadastroClientes/cadastro_clientes.dart';
 import 'package:myapp/src/view/clients_screen/clients_screen.dart';
 import 'package:myapp/src/view/criar_orcamentos/criar_orcamentos.dart';
 import 'package:myapp/src/view/materiais_e_servicos/materiais_e_servicos.dart';

@@ -2,59 +2,88 @@ import 'package:flutter/material.dart';
 import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
 import 'package:myapp/widget/campo_label.dart';
-import 'package:myapp/widget/campo_orcamento.dart';
 import 'package:myapp/widget/linha_icones.dart';
 
-class FazerOrcamentos extends StatelessWidget {
+class FazerOrcamentos extends StatefulWidget {
   const FazerOrcamentos({super.key});
+
+  @override
+  State<FazerOrcamentos> createState() => _FazerOrcamentosState();
+}
+
+class _FazerOrcamentosState extends State<FazerOrcamentos> {
+  final _nomeClienteController = TextEditingController();
+  final _tipoServicoController = TextEditingController();
+  final _materialController = TextEditingController();
+  final _observacoesController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nomeClienteController.dispose();
+    _tipoServicoController.dispose();
+    _materialController.dispose();
+    _observacoesController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'Fazer Orçamentos',
-        automaticallyImplyLeading: true, // No back button on this screen
+        automaticallyImplyLeading: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: ListView(
-            //CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
             children: [
-              CampoOrcamento(label: "Nome do cliente:", placeholder: "digite aqui..."),
+              CampoLabel(
+                label: "Nome do cliente:",
+                placeholder: "digite aqui...",
+                controller: _nomeClienteController,
+              ),
               const SizedBox(height: 8),
-              CampoOrcamento(label: "Tipo de Serviço:", placeholder: "digite aqui..."),
+              CampoLabel(
+                label: "Tipo de Serviço:",
+                placeholder: "digite aqui...",
+                controller: _tipoServicoController,
+              ),
               const SizedBox(height: 8),
-              CampoTextoLivre(label: "Material:", placeholder: "digite aqui..."),
+              CampoLabel(
+                label: "Material:",
+                placeholder: "digite aqui...",
+                controller: _materialController,
+              ),
               const SizedBox(height: 8),
-              //CampoOrcamento(label: "Quantidade:", placeholder: "digite aqui..."),
-              //const SizedBox(height: 8),
-              CampoTextoLivre(label: "Observações:", placeholder: "digite aqui..."),
-              const SizedBox(height: 20),
-              Text("OBS: Orçamento válido por 10 dias.",
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Roboto',)
+              CampoLabel(
+                label: "Observações:",
+                placeholder: "digite aqui...",
+                controller: _observacoesController,
               ),
               const SizedBox(height: 20),
-
-              
+              const Text(
+                "OBS: Orçamento válido por 10 dias.",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+              const SizedBox(height: 20),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   LinhaIcones(label: "Salvar", icon: Icons.save),
                   LinhaIcones(label: "Cancelar", icon: Icons.cancel),
-                  //LinhaIcones(label: "Gerar PDF", icon: Icons.picture_as_pdf)
-                ]
+                ],
               ),
-              SizedBox(height: 30),
-          ],
-          //ATÉ AQUI - CÓDIGO REPRODUZIDO PARA CRIAR OUTROS CAMPOS
-           ),
+              const SizedBox(height: 30),
+            ],
+          ),
         ),
       ),
-      bottomNavigationBar: BarraNavegacaoPrincipal(),
+      bottomNavigationBar: const BarraNavegacaoPrincipal(),
     );
   }
 }
