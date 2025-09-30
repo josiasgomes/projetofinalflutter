@@ -1,20 +1,20 @@
-// lib/campo_texto_personalizado.dart
 import 'package:flutter/material.dart';
 
 class CampoLabel extends StatelessWidget {
   final String label;
   final String placeholder;
-  final TextEditingController? controller; // Controlador adicionado
+  final TextEditingController? controller;
 
   const CampoLabel({
     Key? key,
     required this.label,
     required this.placeholder,
-    this.controller, // Construtor atualizado
+    this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Usamos Column, que por padrão, tenta ocupar a largura máxima disponível
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start, // Alinha o texto à esquerda
       children: [
@@ -27,9 +27,11 @@ class CampoLabel extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 6),
+        // Removida a largura fixa (width: 330)
+        // O Container agora se expande para a largura total do seu pai
         Container(
-          width: 330,
-          //height: 50,
+          //width: 330, <-- REMOVIDO PARA RESPONSIVIDADE
+          //height: 50, <-- Removido também, pois o TextField ajusta a altura
           decoration: BoxDecoration(
             color: const Color(0xffFFFFFF),
             borderRadius: BorderRadius.circular(20.0),
@@ -43,13 +45,21 @@ class CampoLabel extends StatelessWidget {
             ],
           ),
           child: TextField(
-            controller: controller, // Controlador atribuído ao campo de texto
+            controller: controller,
+            // Adicionado padding interno ao TextField para melhor espaçamento do texto
             decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0), 
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.0),
+                // Para remover a linha padrão do OutlineInputBorder, pode-se usar borderSide: BorderSide.none
+                borderSide: BorderSide.none, // O Sombra do Container substitui a borda
               ),
-              labelText: placeholder,
-              labelStyle: const TextStyle(color: Color(0xffC0C0C0)),
+              // Alterado de labelText para hintText, pois labelText geralmente aparece acima
+              // ou com animação quando o campo é focado. hintText é um placeholder estático.
+              hintText: placeholder,
+              hintStyle: const TextStyle(color: Color(0xffC0C0C0)),
+              filled: true,
+              fillColor: Colors.transparent, // Já que a cor de fundo está no Container
             ),
           ),
         ),
