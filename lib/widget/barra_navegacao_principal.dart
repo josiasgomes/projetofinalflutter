@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/theme/app_colors.dart';
-import 'package:myapp/src/view/criar_orcamentos.dart';
+import 'package:myapp/src/view/criar_orcamentos/criar_orcamentos.dart';
 import 'package:myapp/src/view/menu_screen/menu_screen.dart';
 
 class BarraNavegacaoPrincipal extends StatelessWidget {

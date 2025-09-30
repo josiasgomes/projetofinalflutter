@@ -57,15 +57,13 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Column(mainAxisAlignment: MainAxisAlignment.center, 
-                crossAxisAlignment: CrossAxisAlignment.center, 
-                children: [
-                  Text('OrçaPro', style: AppTextstyle.heading1),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/logo.png', width: 220.0, height: 220.0),
 
-                  const SizedBox(height: 32.0),  
-
-                  Text('Identifique-se', style: AppTextstyle.heading2),
-
+                    Text('Identifique-se', style: AppTextstyle.heading2),
                   ],
                 ),
 
@@ -99,9 +97,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text('Login', style: AppTextstyle.clickableButton),
                 ),
 
-                TextButton(
-                  onPressed: widget.toggleView,
-                  child: Text("Não possui uma conta? Clique aqui"),
+                Column(
+                  children: [
+                    TextButton(
+                      onPressed: widget.toggleView,
+                      child: Text("Não possui uma conta? Clique aqui"),
+                    ),
+                    Text("Menu de login", style: AppTextstyle.subTitle1),
+                  ],
                 ),
               ],
             ),

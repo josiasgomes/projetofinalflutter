@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/auth_service.dart';
 import 'package:myapp/src/core/theme/app_colors.dart';
-import 'package:myapp/src/view/cadastro_clientes.dart';
-import 'package:myapp/src/view/clients_screen.dart/clients_screen.dart';
-import 'package:myapp/src/view/criar_orcamentos.dart';
-import 'package:myapp/src/view/materiais_e_servicos.dart';
-import 'package:myapp/src/view/orcamento_salvos.dart';
+import 'package:myapp/src/view/cadastro_clientes/cadastro_clientes.dart';
+import 'package:myapp/src/view/clients_screen/clients_screen.dart';
+import 'package:myapp/src/view/criar_orcamentos/criar_orcamentos.dart';
+import 'package:myapp/src/view/materiais_e_servicos/materiais_e_servicos.dart';
+import 'package:myapp/src/view/orcamentos_salvos/orcamento_salvos.dart';
 import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
 
