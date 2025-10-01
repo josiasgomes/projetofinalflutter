@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/src/core/auth_service.dart';
+import 'package:myapp/src/core/Auth/auth_service.dart';
 import 'package:myapp/src/core/theme/app_buttonStyle.dart';
 import 'package:myapp/src/core/theme/app_textStyle.dart';
 
@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // 5. Atribui o controlador ao campo de senha
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Email'),
+                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Senha'),
                 ),
 
                 const SizedBox(height: 32.0),

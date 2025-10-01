@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/src/core/auth_wrapper.dart';
+import 'package:myapp/src/core/Auth/auth_wrapper.dart';
 import 'package:myapp/src/view/Login/login_screen.dart';
 
 class SplashPage extends StatefulWidget {

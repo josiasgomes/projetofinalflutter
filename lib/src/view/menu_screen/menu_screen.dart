@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/src/core/auth_service.dart';
+import 'package:myapp/src/core/Auth/auth_service.dart';
 import 'package:myapp/src/core/theme/app_colors.dart';
 import 'package:myapp/src/view/CadastroClientes/cadastro_clientes.dart';
 import 'package:myapp/src/view/clients_screen/clients_screen.dart';
@@ -95,7 +95,9 @@ class MenuScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MateriaisEServicosPage()),
+                  MaterialPageRoute(
+                    builder: (context) => MateriaisEServicosPage(),
+                  ),
                 );
               },
             ),
