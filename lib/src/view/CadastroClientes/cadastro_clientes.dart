@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/src/core/clientes_repositorydart';
+import 'package:myapp/src/core/clientes_repository.dart';
 import 'package:myapp/src/model/cliente.dart';
 // Certifique-se de que os imports dos seus widgets personalizados estão corretos
 import 'package:myapp/widget/app_bar.dart';
@@ -43,7 +43,7 @@ class _CadastroClientesState extends State<CadastroClientes> {
 
   void _salvarCliente() async {
     //Lógica de salvar o cliente e enviar pro banco de dados nosql
-    Cliente cliente = Cliente(
+    Cliente _cliente = Cliente(
       name: _nomeController.text,
       cpf: int.tryParse(_cpfCnpjController.text) ?? 0,
       telefone: int.tryParse(_telefoneController.text) ?? 0,
@@ -52,17 +52,28 @@ class _CadastroClientesState extends State<CadastroClientes> {
       cep: int.tryParse(_cepController.text) ?? 0,
       cidade: _cidadeController.text,
     );
+    try {
+      await ClientesRepository.addCliente(_cliente.toMap());
 
-    await ClientesRepository.addCliente(cliente);
+      // Mostra um feedback de sucesso
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Cliente salvo com sucesso!')),
+      );
 
-    // Limpar os campos após o salvamento
-    _nomeController.clear();
-    _cpfCnpjController.clear();
-    _telefoneController.clear();
-    _emailController.clear();
-    _enderecoController.clear();
-    _cepController.clear();
-    _cidadeController.clear();
+      // Limpa os campos após o salvamento bem-sucedido
+      _nomeController.clear();
+      _cpfCnpjController.clear();
+      _telefoneController.clear();
+      _emailController.clear();
+      _enderecoController.clear();
+      _cepController.clear();
+      _cidadeController.clear();
+    } catch (e) {
+      // Mostra um feedback de erro caso algo dê errado
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Erro ao salvar cliente: $e')));
+    }
   }
 
   @override

@@ -5,8 +5,8 @@ class ClientesRepository {
   final CollectionReference _clientesCollection = FirebaseFirestore.instance
       .collection('clientes');
 
-  Future<void> addCliente(Cliente cliente) async {
-    await _clientesCollection.add(cliente.toMap());
+  Future<void> addCliente(Map clienteMap) async {
+    await _clientesCollection.add(clienteMap);
   }
 
   Stream<List<Cliente>> getClienteCollection() {
