@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/src/core/cliente.dart';
+import 'package:myapp/src/core/clientes_repositorydart';
+import 'package:myapp/src/model/cliente.dart';
 // Certifique-se de que os imports dos seus widgets personalizados estão corretos
 import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
@@ -40,26 +41,28 @@ class _CadastroClientesState extends State<CadastroClientes> {
     super.dispose();
   }
 
-  void _salvarCliente(
-      required TextEditingController nomeController,
-      required TextEditingController cpfCnpjController,
-      required TextEditingController telefoneController,
-      required TextEditingController emailController,
-      required TextEditingController enderecoController,
-      required TextEditingController cepController,
-      required TextEditingController cidadeController) {
+  void _salvarCliente() async {
+    //Lógica de salvar o cliente e enviar pro banco de dados nosql
+    Cliente cliente = Cliente(
+      name: _nomeController.text,
+      cpf: int.tryParse(_cpfCnpjController.text) ?? 0,
+      telefone: int.tryParse(_telefoneController.text) ?? 0,
+      email: _emailController.text,
+      endereco: _enderecoController.text,
+      cep: int.tryParse(_cepController.text) ?? 0,
+      cidade: _cidadeController.text,
+    );
 
-        //Lógica de salvar o cliente e enviar pro banco de dados nosql
-        Cliente cliente = Cliente(
-          name: nomeController.text,
-          cpf: int.tryParse(cpfCnpjController.text) ?? 0,
-          telefone:int.tryParse(telefoneController.text) ?? 0, 
-          email: emailController.text, 
-          endereco: enderecoController.text, 
-          cep: int.tryParse(cepController.text) ?? 0, 
-          cidade: cidadeController.text);
+    await ClientesRepository.addCliente(cliente);
 
-          
+    // Limpar os campos após o salvamento
+    _nomeController.clear();
+    _cpfCnpjController.clear();
+    _telefoneController.clear();
+    _emailController.clear();
+    _enderecoController.clear();
+    _cepController.clear();
+    _cidadeController.clear();
   }
 
   @override
@@ -151,8 +154,12 @@ class _CadastroClientesState extends State<CadastroClientes> {
                       spacing: 24.0, // Espaçamento horizontal entre os botões
                       runSpacing:
                           10.0, // Espaçamento vertical (ao quebrar a linha)
-                      children: const [
-                        LinhaIcones(label: "Salvar", icon: Icons.save),
+                      children: [
+                        LinhaIcones(
+                          label: "Salvar",
+                          icon: Icons.save,
+                          onPressed: _salvarCliente,
+                        ),
                         LinhaIcones(label: "Cancelar", icon: Icons.cancel),
                       ],
                     ),

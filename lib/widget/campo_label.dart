@@ -9,7 +9,7 @@ class CampoLabel extends StatelessWidget {
     Key? key,
     required this.label,
     required this.placeholder,
-    this.controller,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -48,18 +48,23 @@ class CampoLabel extends StatelessWidget {
             controller: controller,
             // Adicionado padding interno ao TextField para melhor espaçamento do texto
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0), 
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 15.0,
+                horizontal: 20.0,
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.0),
                 // Para remover a linha padrão do OutlineInputBorder, pode-se usar borderSide: BorderSide.none
-                borderSide: BorderSide.none, // O Sombra do Container substitui a borda
+                borderSide:
+                    BorderSide.none, // O Sombra do Container substitui a borda
               ),
               // Alterado de labelText para hintText, pois labelText geralmente aparece acima
               // ou com animação quando o campo é focado. hintText é um placeholder estático.
               hintText: placeholder,
               hintStyle: const TextStyle(color: Color(0xffC0C0C0)),
               filled: true,
-              fillColor: Colors.transparent, // Já que a cor de fundo está no Container
+              fillColor:
+                  Colors.transparent, // Já que a cor de fundo está no Container
             ),
           ),
         ),
