@@ -43,7 +43,7 @@ class _CadastroClientesState extends State<CadastroClientes> {
 
   void _salvarCliente() async {
     //Lógica de salvar o cliente e enviar pro banco de dados nosql
-    Cliente _cliente = Cliente(
+    Cliente cliente = Cliente(
       name: _nomeController.text,
       cpf: int.tryParse(_cpfCnpjController.text) ?? 0,
       telefone: int.tryParse(_telefoneController.text) ?? 0,
@@ -53,7 +53,7 @@ class _CadastroClientesState extends State<CadastroClientes> {
       cidade: _cidadeController.text,
     );
     try {
-      await ClientesRepository.addCliente(_cliente.toMap());
+      await clientesRepository.addCliente(cliente.toMap());
 
       // Mostra um feedback de sucesso
       ScaffoldMessenger.of(context).showSnackBar(

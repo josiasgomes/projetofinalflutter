@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:myapp/src/model/cliente.dart';
 
+ClientesRepository clientesRepository = ClientesRepository();
+
 class ClientesRepository {
   final CollectionReference _clientesCollection = FirebaseFirestore.instance
       .collection('clientes');
