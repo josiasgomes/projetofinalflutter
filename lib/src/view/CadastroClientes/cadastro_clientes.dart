@@ -162,19 +162,7 @@ class _CadastroClientesState extends State<CadastroClientes> {
                           ],
                         ),
 
-                  SizedBox(height: verticalSpacing * 2.5),
-
-                  Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: 24.0, 
-                    runSpacing: 10.0,
-                    children: const [
-                      LinhaIcones(label: "Salvar", icon: Icons.save),
-                      LinhaIcones(label: "Cancelar", icon: Icons.cancel),
-                    ],
-                  ),
-                  SizedBox(height: verticalSpacing * 2.5),
-                ],
+                
                     // **3. USANDO Wrap PARA BOTÕES RESPONSIVOS**
                     // O Wrap quebra os elementos para a próxima linha se não houver espaço suficiente,
                     // evitando o erro de "overflow" (elementos passando do limite da tela).
