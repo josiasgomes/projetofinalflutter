@@ -1,10 +1,11 @@
+
 // ignore_for_file: avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/auth/auth_service.dart';
-import 'package:myapp/src/core/theme/app_buttonStyle.dart';
-import 'package:myapp/src/core/theme/app_textStyle.dart';
+import 'package:myapp/src/core/theme/app_button_style.dart';
+import 'package:myapp/src/core/theme/app_text_style.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback toggleView;
@@ -40,75 +41,91 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       await authService.value.signIn(email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      setState(() {
-        errorMessage = e.message ?? 'Erro desconhecido';
-      });
+      if (mounted) {
+        setState(() {
+          errorMessage = e.message ?? 'Erro desconhecido';
+        });
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    // Get screen size for responsive layout
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
-      body: Form(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/logo.png', width: 220.0, height: 220.0),
+      // Use SingleChildScrollView to avoid overflow when keyboard appears
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.06),
+          // Ensure the container takes at least the full screen height
+          constraints: BoxConstraints(minHeight: size.height),
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              // Make the image responsive
+              Image.asset(
+                'assets/logo.png',
+                width: size.width * 0.5, // 50% of screen width
+                height: size.width * 0.5,
+              ),
+              
+              Text(
+                'Identifique-se', 
+                style: AppTextstyle.heading2, 
+                textAlign: TextAlign.center
+              ),
 
-                    Text('Identifique-se', style: AppTextstyle.heading2),
-                  ],
+              // Use a fraction of the screen height for spacing
+              SizedBox(height: size.height * 0.04),
+
+              TextField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: AppButtonStyle.textFieldDecoration(hint: 'Email'),
+              ),
+
+              SizedBox(height: size.height * 0.02),
+
+              TextField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: AppButtonStyle.textFieldDecoration(hint: 'Senha'),
+              ),
+
+              SizedBox(height: size.height * 0.03),
+
+              if (errorMessage.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12.0),
+                  child: Text(
+                    errorMessage,
+                    style: const TextStyle(color: Colors.red, fontSize: 14),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
 
-                const SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: _login,
+                style: AppButtonStyle.elevattedButtonStandart,
+                child: Text('Login', style: AppTextstyle.clickableButton),
+              ),
 
-                TextField(
-                  // 4. Atribui o controlador ao campo de e-mail
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Email'),
-                ),
+              SizedBox(height: size.height * 0.02),
 
-                const SizedBox(height: 32.0),
-
-                TextField(
-                  // 5. Atribui o controlador ao campo de senha
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Senha'),
-                ),
-
-                const SizedBox(height: 32.0),
-
-                if (errorMessage != '')
-                  Text(errorMessage, style: const TextStyle(color: Colors.red)),
-
-                ElevatedButton(
-                  onPressed:
-                      _login, // 6. Chama a função _login ao pressionar o botão
-                  style: AppButtonStyle.elevattedButtonStandart,
-                  child: Text('Login', style: AppTextstyle.clickableButton),
-                ),
-
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextButton(
-                      onPressed: widget.toggleView,
-                      child: Text("Não possui uma conta? Clique aqui"),
-                    ),
-                    Text("Menu de login", style: AppTextstyle.subTitle1),
-                  ],
-                ),
-              ],
-            ),
+              TextButton(
+                onPressed: widget.toggleView,
+                child: const Text("Não possui uma conta? Clique aqui"),
+              ),
+              Text(
+                "Menu de login", 
+                style: AppTextstyle.subTitle1, 
+                textAlign: TextAlign.center
+              ),
+            ],
           ),
         ),
       ),

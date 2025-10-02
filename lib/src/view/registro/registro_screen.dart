@@ -1,10 +1,11 @@
+
 // ignore_for_file: avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/auth/auth_service.dart';
-import 'package:myapp/src/core/theme/app_buttonStyle.dart';
-import 'package:myapp/src/core/theme/app_textStyle.dart';
+import 'package:myapp/src/core/theme/app_button_style.dart';
+import 'package:myapp/src/core/theme/app_text_style.dart';
 
 class RegisterScreen extends StatefulWidget {
   final VoidCallback toggleView;
@@ -20,8 +21,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
-  
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
   String errorMessage = '';
 
   // 2. Limpa os controladores quando o widget é descartado
@@ -41,107 +43,120 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final email = _emailController.text;
     final password = _passwordController.text;
     final confirmPassword = _confirmPasswordController.text;
-    
 
     // lógica real para registrar o usuário
 
     try {
-      if (name != '' && password == confirmPassword)
-      {
+      if (name.isNotEmpty && password == confirmPassword) {
         await authService.value.register(email: email, password: password);
+      } else if (password != confirmPassword) {
+        setState(() {
+          errorMessage = 'As senhas não correspondem.';
+        });
       }
-
     } on FirebaseAuthException catch (e) {
-      setState(() {
-        errorMessage = e.message ?? 'Erro desconhecido';
-      });
+      if (mounted) {
+        setState(() {
+          errorMessage = e.message ?? 'Erro desconhecido';
+        });
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    // Get screen size for responsive layout
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
-      body: Form(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/logo.png', width: 220.0, height: 220.0),
+      // Use SingleChildScrollView to avoid overflow when keyboard appears
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.06),
+          // Ensure the container takes at least the full screen height
+          constraints: BoxConstraints(minHeight: size.height),
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              // Make the image responsive
+              Image.asset(
+                'assets/logo.png',
+                width: size.width * 0.4, // 40% of screen width
+                height: size.width * 0.4,
+              ),
 
-                    Text('Identifique-se', style: AppTextstyle.heading2),
-                  ],
-                ),
+              Text(
+                'Crie sua conta',
+                style: AppTextstyle.heading2,
+                textAlign: TextAlign.center,
+              ),
 
-                const SizedBox(height: 16.0),
+              // Use a fraction of the screen height for spacing
+              SizedBox(height: size.height * 0.03),
 
-                TextField(
-                  // 4. Atribui o controlador ao campo de e-mail
-                  controller: _nameController,
-                  keyboardType: TextInputType.emailAddress,
-                  obscureText: true,
-                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Nome'),
-                ),
+              TextField(
+                controller: _nameController,
+                keyboardType: TextInputType.text,
+                decoration: AppButtonStyle.textFieldDecoration(hint: 'Nome'),
+              ),
 
-                const SizedBox(height: 32.0),
+              SizedBox(height: size.height * 0.02),
 
-                TextField(
-                  // 4. Atribui o controlador ao campo de e-mail
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  obscureText: true,
-                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Email'),
-                ),
+              TextField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: AppButtonStyle.textFieldDecoration(hint: 'Email'),
+              ),
 
-                const SizedBox(height: 32.0),
+              SizedBox(height: size.height * 0.02),
 
-                TextField(
-                  // 5. Atribui o controlador ao campo de senha
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Senha'),
-                ),
+              TextField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: AppButtonStyle.textFieldDecoration(hint: 'Senha'),
+              ),
 
-                const SizedBox(height: 32.0),
+              SizedBox(height: size.height * 0.02),
 
-                TextField(
-                  // 4. Atribui o controlador ao campo de e-mail
-                  controller: _confirmPasswordController,
-                  keyboardType: TextInputType.emailAddress,
-                  obscureText: true,
-                  decoration: AppButtonStyle.textFieldDecoration(hint: 'Confirmar a senha'),
-                ),
+              TextField(
+                controller: _confirmPasswordController,
+                obscureText: true,
+                decoration: AppButtonStyle.textFieldDecoration(hint: 'Confirmar a senha'),
+              ),
 
-                const SizedBox(height: 32.0),
+              SizedBox(height: size.height * 0.03),
 
-                if (errorMessage != '')
-                  Text(errorMessage, style: const TextStyle(color: Colors.red)),
-
-                ElevatedButton(
-                  onPressed:
-                      _register, // 6. Chama a registro _register ao pressionar o botão
-                  style: AppButtonStyle.elevattedButtonStandart,
-                  child: Text('Registrar-se', style: AppTextstyle.clickableButton),
+              if (errorMessage.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12.0),
+                  child: Text(
+                    errorMessage,
+                    style: const TextStyle(color: Colors.red, fontSize: 14),
+                    textAlign: TextAlign.center,
                   ),
-                  
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextButton(
-                      onPressed: widget.toggleView,
-                      child: Text("Já possui uma conta? Clique aqui"),
-                    ),
-                    Text("Criar conta", style: AppTextstyle.subTitle1),
-                  ],
                 ),
-              ],
-            ),
+
+              ElevatedButton(
+                onPressed: _register,
+                style: AppButtonStyle.elevattedButtonStandart,
+                child:
+                    Text('Registrar-se', style: AppTextstyle.clickableButton),
+              ),
+
+              SizedBox(height: size.height * 0.02),
+
+              TextButton(
+                onPressed: widget.toggleView,
+                child: const Text("Já possui uma conta? Clique aqui"),
+              ),
+               Text(
+                "Criar conta", 
+                style: AppTextstyle.subTitle1, 
+                textAlign: TextAlign.center
+              ),
+            ],
           ),
         ),
       ),

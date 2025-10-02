@@ -15,62 +15,88 @@ class BarraNavegacaoPrincipal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 1. Obter as dimensões da tela para responsividade.
-    final screenWidth = MediaQuery.of(context).size.width;
-
-    // 2. Definir tamanhos responsivos AUMENTADOS:
-    // Altura da barra: 6% da largura da tela (era 5%).
-    final double barHeight = screenWidth * 0.09; 
-    // Tamanho dos ícones: 90% da altura da barra (era 80%).
-    final double iconSize = barHeight * 1.0; 
-
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
       notchMargin: 8.0,
-      color: Colors.white, 
+      color: Colors.white,
       elevation: 12.0,
-      
-      child: Padding(
-        // Centraliza os ícones verticalmente.
-        padding: EdgeInsets.symmetric(vertical: (barHeight - iconSize) / 2), 
-        
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            // Ícone 1 (Início)
-            Flexible(
-              child: IconButton(
-                // Ícone com tamanho responsivo maior
-                icon: Icon(Icons.home_outlined, color: AppColors.primary, size: iconSize), 
-                padding: EdgeInsets.zero, 
-                constraints: const BoxConstraints(), 
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MenuScreen()),
-                  );
-                },
-                tooltip: 'Início',
-              ),
+      // Altura fixa e segura para a barra de navegação.
+      height: 70.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          _buildNavItem(
+            context,
+            icon: Icons.home_outlined,
+            tooltip: 'Início',
+            onPressed: () {
+              if (onHomePressed != null) {
+                onHomePressed!();
+              } else {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MenuScreen()),
+                );
+              }
+            },
+          ),
+          _buildNavItem(
+            context,
+            icon: Icons.edit_document,
+            tooltip: 'Orçamentos',
+            onPressed: () {
+              if (onListPressed != null) {
+                onListPressed!();
+              } else {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const FazerOrcamentos()),
+                );
+              }
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavItem(
+    BuildContext context,
+    {
+      required IconData icon,
+      required String tooltip,
+      required VoidCallback onPressed,
+    }
+  ) {
+    // Usar Expanded para que cada item ocupe o mesmo espaço horizontal.
+    return Expanded(
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(50),
+        child: Center(
+          // FittedBox é a solução definitiva para escalar o conteúdo e evitar overflow.
+          child: FittedBox(
+            fit: BoxFit.contain, // Garante que o conteúdo caiba sem distorcer.
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icon, 
+                  color: AppColors.primary, 
+                  size: 30, // Tamanho base do ícone.
+                ),
+                const SizedBox(height: 5), // Espaçamento.
+                Text(
+                  tooltip, 
+                  style: TextStyle(
+                    fontSize: 14, // Tamanho base da fonte.
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )
+              ],
             ),
-            
-            // Ícone 2 (Orçamentos)
-            Flexible(
-              child: IconButton(
-                // Ícone com tamanho responsivo maior
-                icon: Icon(Icons.edit_document, color: AppColors.primary, size: iconSize), 
-                padding: EdgeInsets.zero, 
-                constraints: const BoxConstraints(), 
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => FazerOrcamentos()),
-                  );
-                },
-                tooltip: 'Orçamentos',
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

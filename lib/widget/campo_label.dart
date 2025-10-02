@@ -4,19 +4,19 @@ class CampoLabel extends StatelessWidget {
   final String label;
   final String placeholder;
   final TextEditingController? controller;
+  final int maxLines; // Novo parâmetro para o número de linhas
 
   const CampoLabel({
     Key? key,
     required this.label,
     required this.placeholder,
-    required this.controller,
+    required this.controller, this.maxLines = 1,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Usamos Column, que por padrão, tenta ocupar a largura máxima disponível
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start, // Alinha o texto à esquerda
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
@@ -27,11 +27,7 @@ class CampoLabel extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 6),
-        // Removida a largura fixa (width: 330)
-        // O Container agora se expande para a largura total do seu pai
         Container(
-          //width: 330, <-- REMOVIDO PARA RESPONSIVIDADE
-          //height: 50, <-- Removido também, pois o TextField ajusta a altura
           decoration: BoxDecoration(
             color: const Color(0xffFFFFFF),
             borderRadius: BorderRadius.circular(20.0),
@@ -46,7 +42,10 @@ class CampoLabel extends StatelessWidget {
           ),
           child: TextField(
             controller: controller,
-            // Adicionado padding interno ao TextField para melhor espaçamento do texto
+            // Usa o parâmetro maxLines para definir a altura do campo
+            maxLines: maxLines,
+            // Ajusta o tipo de teclado para otimizar para múltiplas linhas
+            keyboardType: maxLines > 1 ? TextInputType.multiline : TextInputType.text,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 15.0,
@@ -55,16 +54,12 @@ class CampoLabel extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.0),
                 // Para remover a linha padrão do OutlineInputBorder, pode-se usar borderSide: BorderSide.none
-                borderSide:
-                    BorderSide.none, // O Sombra do Container substitui a borda
+                borderSide: BorderSide.none, // O Sombra do Container substitui a borda
               ),
-              // Alterado de labelText para hintText, pois labelText geralmente aparece acima
-              // ou com animação quando o campo é focado. hintText é um placeholder estático.
               hintText: placeholder,
               hintStyle: const TextStyle(color: Color(0xffC0C0C0)),
               filled: true,
-              fillColor:
-                  Colors.transparent, // Já que a cor de fundo está no Container
+              fillColor: Colors.transparent, // Já que a cor de fundo está no Container
             ),
           ),
         ),

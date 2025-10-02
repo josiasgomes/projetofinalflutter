@@ -7,18 +7,22 @@ class ClientsListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen size for responsive layout
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'Clientes',
         automaticallyImplyLeading: true, // No back button on this screen
       ),
       body: ListView.builder(
-        itemCount: 6, // Este número será dinâmico, vindo do banco de dados
+        itemCount: 6, // This number will be dynamic, coming from the database
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 8.0,
+            // Use a fraction of the screen width for horizontal padding
+            padding: EdgeInsets.symmetric(
+              horizontal: size.width * 0.04, // 4% of screen width
+              vertical: 8.0, // Vertical padding can often remain fixed
             ),
             child: Card(
               elevation: 4,
@@ -26,27 +30,28 @@ class ClientsListScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 20,
+                // Use responsive padding inside the ListTile as well
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.05, // 5% of screen width
                   vertical: 10,
                 ),
                 title: Text(
-                  'Cliente ${index + 1}', // Este texto será o nome do cliente
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  'Cliente ${index + 1}', // This text will be the client's name
+                  // Use theme-based text styles for responsiveness
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
                 ),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
-                  // Ação ao clicar no cliente (por exemplo, ir para a tela de detalhes do cliente)
+                  // Action when clicking on the client (e.g., go to client details screen)
                 },
               ),
             ),
           );
         },
       ),
-      bottomNavigationBar: BarraNavegacaoPrincipal(),
+      bottomNavigationBar: const BarraNavegacaoPrincipal(),
     );
   }
 }

@@ -14,14 +14,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final appBarHeight = preferredSize.height;
+
     return SafeArea(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        padding: EdgeInsets.symmetric(
+          horizontal: size.width * 0.04, // 4% of screen width
+          vertical: 8.0,
+        ),
         decoration: const BoxDecoration(
-          color: Color.fromARGB(0, 255, 255, 255),
+          color: Colors.transparent, // Simplified color
           boxShadow: [
             BoxShadow(
-              color: Color.fromARGB(0, 0, 0, 0),
+              color: Color.fromARGB(31, 255, 255, 255),
               blurRadius: 4.0,
               offset: Offset(0, 2),
             ),
@@ -36,18 +42,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onPressed: onBack ?? () => Navigator.of(context).pop(),
               )
             else
-              const SizedBox(width: 48), // Maintain spacing
-            Text(
-              title,
-              style: const TextStyle(
-                color: Colors.deepPurple,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
+              const SizedBox(width: 48), // Maintain spacing for alignment
+            
+            Expanded(
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Colors.deepPurple,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
             ),
-            const CircleAvatar(
-              backgroundImage: NetworkImage('https://i.pravatar.cc/150?img=12'),
-              radius: 20,
+
+            CircleAvatar(
+              backgroundImage: const NetworkImage('https://i.pravatar.cc/150?img=12'),
+              radius: appBarHeight * 0.35, // 35% of the AppBar's height
             ),
           ],
         ),

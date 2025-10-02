@@ -8,7 +8,7 @@ import 'package:myapp/widget/linha_icones.dart';
 class OrcamentosSalvos extends StatelessWidget {
   const OrcamentosSalvos({super.key});
 
-  // Define a largura máxima ideal para o conteúdo principal
+  // Largura máxima para o conteúdo principal em telas grandes
   static const double _maxWidthContent = 700.0;
 
   @override
@@ -16,107 +16,120 @@ class OrcamentosSalvos extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'Orçamentos Salvos',
-        automaticallyImplyLeading: true, // Mantém o botão de voltar padrão
+        automaticallyImplyLeading: true,
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          final double screenWidth = constraints.maxWidth;
-          final bool isLargeScreen = screenWidth > _maxWidthContent;
+          final bool isLargeScreen = constraints.maxWidth > _maxWidthContent;
+          final double horizontalPadding = constraints.maxWidth * 0.04;
+          final double verticalSpacing = constraints.maxHeight * 0.025;
 
           return Center(
-            // Limita a largura do conteúdo principal em telas grandes
-            child: SizedBox(
-              width: isLargeScreen ? _maxWidthContent : screenWidth,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ListView(
-                  children: [
-                    // Área de Pesquisa
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch, // Faz o conteúdo (TextField) esticar
-                      children: [
-                        // O Text está vazio no código original, mas foi mantido aqui
-                        const Text(
-                          "",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Roboto',
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        // O Container do TextField agora usa largura máxima disponível
-                        Container(
-                          // Removida a largura fixa de 330 para usar toda a largura disponível (stretch)
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: const Color(0xffFFFFFF),
-                            borderRadius: BorderRadius.circular(50.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withAlpha(50),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                                borderSide: BorderSide.none, // O container já tem a decoração de sombra
-                              ),
-                              labelText: "pesquisar...",
-                              labelStyle: const TextStyle(color: Color(0xffC0C0C0)),
-                              suffixIcon: const Icon(
-                                Icons.search,
-                                color: Color(0xffAE11BC),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+            child: Container(
+              width: isLargeScreen ? _maxWidthContent : constraints.maxWidth,
+              child: CustomScrollView(
+                slivers: [
+                  // 1. Espaçador no topo
+                  SliverToBoxAdapter(
+                    child: SizedBox(height: verticalSpacing),
+                  ),
+                  // 2. Campo de pesquisa
+                  SliverPadding(
+                    padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                    sliver: SliverToBoxAdapter(
+                      child: _buildSearchField(context, constraints),
                     ),
-
-                    const SizedBox(height: 16), // Aumentei o espaçamento para clareza
-
-                    const FiltrandoOrcamentos(),
-
-                    const SizedBox(height: 16),
-
-                    // Lista de Cards
-                    const CardOrcamento(),
-                    const SizedBox(height: 8),
-                    const CardOrcamento(),
-                    const SizedBox(height: 8),
-                    const CardOrcamento(),
-                    const SizedBox(height: 8),
-
-                    const SizedBox(height: 20),
-
-                    // Botões de Ação Responsivos
-                    // Usa Wrap para quebrar a linha se a tela for muito estreita
-                    const Wrap(
-                      alignment: WrapAlignment.center, // Centraliza os botões
-                      spacing: 20.0, // Espaço horizontal entre os itens
-                      runSpacing: 10.0, // Espaço vertical (quando quebra a linha)
-                      children: [
-                        LinhaIcones(label: "Salvar", icon: Icons.save),
-                        LinhaIcones(label: "Cancelar", icon: Icons.cancel),
-                        LinhaIcones(label: "Gerar PDF", icon: Icons.picture_as_pdf)
-                      ],
+                  ),
+                  // 3. Espaçador
+                  SliverToBoxAdapter(
+                    child: SizedBox(height: verticalSpacing),
+                  ),
+                  // 4. Filtros
+                  SliverPadding(
+                    padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                    sliver: const SliverToBoxAdapter(
+                      child: FiltrandoOrcamentos(),
                     ),
-                    const SizedBox(height: 30),
-                  ],
-                ),
+                  ),
+                  // 5. Espaçador
+                  SliverToBoxAdapter(
+                    child: SizedBox(height: verticalSpacing),
+                  ),
+                  // 6. Lista de Orçamentos
+                  SliverPadding(
+                    padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                    sliver: _buildBudgetList(),
+                  ),
+                  // 7. Espaçador
+                  SliverToBoxAdapter(
+                    child: SizedBox(height: verticalSpacing),
+                  ),
+                  // 8. Botões de ação
+                  SliverPadding(
+                    padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                    sliver: SliverToBoxAdapter(
+                      child: _buildActionButtons(),
+                    ),
+                  ),
+                  // 9. Espaçador na base
+                  SliverToBoxAdapter(
+                    child: SizedBox(height: verticalSpacing),
+                  ),
+                ],
               ),
             ),
           );
         },
       ),
       bottomNavigationBar: const BarraNavegacaoPrincipal(),
+    );
+  }
+
+  // Widget para o campo de pesquisa
+  Widget _buildSearchField(BuildContext context, BoxConstraints constraints) {
+    return TextField(
+      decoration: InputDecoration(
+        hintText: "pesquisar...",
+        hintStyle: TextStyle(color: Colors.grey.shade400),
+        prefixIcon: Icon(Icons.search, color: Theme.of(context).primaryColor),
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: constraints.maxWidth * 0.05,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30.0),
+          borderSide: BorderSide.none,
+        ),
+     
+      ),
+    );
+  }
+
+  // Widget para a lista de orçamentos (agora usando SliverList)
+  Widget _buildBudgetList() {
+    return SliverList.builder(
+      itemCount: 3, // Simula 3 orçamentos
+      itemBuilder: (context, index) {
+        return const Padding(
+          padding: EdgeInsets.only(bottom: 8.0), // Espaço entre os cards
+          child: CardOrcamento(),
+        );
+      },
+    );
+  }
+
+  // Widget para os botões de ação
+  Widget _buildActionButtons() {
+    return const Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 20.0, // Espaço horizontal
+      runSpacing: 10.0, // Espaço vertical
+      children: [
+        LinhaIcones(label: "Salvar", icon: Icons.save),
+        LinhaIcones(label: "Cancelar", icon: Icons.cancel),
+        LinhaIcones(label: "Gerar PDF", icon: Icons.picture_as_pdf),
+      ],
     );
   }
 }

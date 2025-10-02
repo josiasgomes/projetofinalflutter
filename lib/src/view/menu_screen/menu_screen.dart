@@ -23,13 +23,14 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 1. Obter a largura da tela com MediaQuery
-    final screenWidth = MediaQuery.of(context).size.width;
+    final size = MediaQuery.of(context).size;
 
-    // 2. Determinar o número de colunas com base na largura da tela
-    // Se a tela for menor que 600 pixels (típico de celulares), usa 2 colunas.
-    // Se for maior, usa 4 colunas (bom para tablets e web).
-    final crossAxisCount = screenWidth < 600 ? 2 : 4;
+    // Determina o número de colunas com base na largura da tela
+    final crossAxisCount = size.width < 600 ? 2 : 4;
+    // Define o espaçamento proporcional à largura da tela
+    final spacing = size.width * 0.04;
+    // Calcula a proporção de aspecto para os itens da grade
+    final aspectRatio = size.width / (size.height * 0.6);
 
     return Scaffold(
       appBar: const CustomAppBar(
@@ -37,12 +38,12 @@ class MenuScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        // 3. Usar a contagem de colunas dinâmica
+        padding: EdgeInsets.all(spacing),
         child: GridView.count(
           crossAxisCount: crossAxisCount,
-          crossAxisSpacing: 16.0,
-          mainAxisSpacing: 16.0,
+          crossAxisSpacing: spacing,
+          mainAxisSpacing: spacing,
+          childAspectRatio: aspectRatio, 
           children: [
             _buildMenuItem(
               context,
@@ -51,7 +52,7 @@ class MenuScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CadastroClientes()),
+                  MaterialPageRoute(builder: (context) => const CadastroClientes()),
                 );
               },
             ),
@@ -62,7 +63,7 @@ class MenuScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ClientsListScreen()),
+                  MaterialPageRoute(builder: (context) => const ClientsListScreen()),
                 );
               },
             ),
@@ -73,7 +74,7 @@ class MenuScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FazerOrcamentos()),
+                  MaterialPageRoute(builder: (context) => const FazerOrcamentos()),
                 );
               },
             ),
@@ -84,7 +85,7 @@ class MenuScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OrcamentosSalvos()),
+                  MaterialPageRoute(builder: (context) => const OrcamentosSalvos()),
                 );
               },
             ),
@@ -96,7 +97,7 @@ class MenuScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MateriaisEServicosPage(),
+                    builder: (context) => const MateriaisEServicosPage(),
                   ),
                 );
               },
@@ -118,7 +119,7 @@ class MenuScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BarraNavegacaoPrincipal(),
+      bottomNavigationBar: const BarraNavegacaoPrincipal(),
     );
   }
 
@@ -134,17 +135,26 @@ class MenuScreen extends StatelessWidget {
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 48, color: AppColors.primary),
-            const SizedBox(height: 12),
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
-          ],
+        child: LayoutBuilder( // Usar LayoutBuilder para obter o tamanho do item
+          builder: (context, constraints) {
+            final iconSize = constraints.maxHeight * 0.4; // 40% da altura do card
+            final verticalGap = constraints.maxHeight * 0.08; // 8% de espaçamento
+
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, size: iconSize, color: AppColors.primary),
+                SizedBox(height: verticalGap),
+                Text(
+                  text,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

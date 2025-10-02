@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/theme/app_colors.dart';
-import 'package:myapp/src/core/theme/app_textStyle.dart';
+import 'package:myapp/src/core/theme/app_text_style.dart';
 
 class AppButtonStyle {
   //Sizes

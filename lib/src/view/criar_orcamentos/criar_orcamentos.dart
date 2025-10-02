@@ -33,55 +33,69 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
         title: 'Fazer Orçamentos',
         automaticallyImplyLeading: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: ListView(
-            children: [
-              CampoLabel(
-                label: "Nome do cliente:",
-                placeholder: "digite aqui...",
-                controller: _nomeClienteController,
-              ),
-              const SizedBox(height: 8),
-              CampoLabel(
-                label: "Tipo de Serviço:",
-                placeholder: "digite aqui...",
-                controller: _tipoServicoController,
-              ),
-              const SizedBox(height: 8),
-              CampoLabel(
-                label: "Material:",
-                placeholder: "digite aqui...",
-                controller: _materialController,
-              ),
-              const SizedBox(height: 8),
-              CampoLabel(
-                label: "Observações:",
-                placeholder: "digite aqui...",
-                controller: _observacoesController,
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                "OBS: Orçamento válido por 10 dias.",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Roboto',
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final double horizontalPadding = constraints.maxWidth * 0.05;
+          final double verticalSpacing = constraints.maxHeight * 0.02;
+          final double maxWidth = constraints.maxWidth > 600 ? 600 : constraints.maxWidth;
+
+          return Center(
+            child: Container(
+              width: maxWidth,
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: verticalSpacing * 2),
+                    CampoLabel(
+                      label: "Nome do cliente:",
+                      placeholder: "digite aqui...",
+                      controller: _nomeClienteController,
+                    ),
+                    SizedBox(height: verticalSpacing),
+                    CampoLabel(
+                      label: "Tipo de Serviço:",
+                      placeholder: "digite aqui...",
+                      controller: _tipoServicoController,
+                    ),
+                    SizedBox(height: verticalSpacing),
+                    CampoLabel(
+                      label: "Material:",
+                      placeholder: "digite aqui...",
+                      controller: _materialController,
+                    ),
+                    SizedBox(height: verticalSpacing),
+                    // Campo de observações agora com 5 linhas
+                    CampoLabel(
+                      label: "Observações:",
+                      placeholder: "digite aqui...",
+                      controller: _observacoesController,
+                      maxLines: 5,
+                    ),
+                    SizedBox(height: verticalSpacing * 1.5),
+                    Text(
+                      "OBS: Orçamento válido por 10 dias.",
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    SizedBox(height: verticalSpacing * 1.5),
+                    Wrap(
+                      spacing: 24.0, // Espaçamento horizontal
+                      runSpacing: 10.0, // Espaçamento vertical
+                      alignment: WrapAlignment.center,
+                      children: const [
+                        LinhaIcones(label: "Salvar", icon: Icons.save),
+                        LinhaIcones(label: "Cancelar", icon: Icons.cancel),
+                      ],
+                    ),
+                    SizedBox(height: verticalSpacing * 2),
+                  ],
                 ),
               ),
-              const SizedBox(height: 20),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  LinhaIcones(label: "Salvar", icon: Icons.save),
-                  LinhaIcones(label: "Cancelar", icon: Icons.cancel),
-                ],
-              ),
-              const SizedBox(height: 30),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
       bottomNavigationBar: const BarraNavegacaoPrincipal(),
     );
