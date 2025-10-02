@@ -16,6 +16,9 @@ dependencies:
   firebase_auth: ^4.17.8
   cloud_firestore: ^4.15.8
   syncfusion_flutter_charts: ^31.1.21
+  pdf: ^3.10.4
+  printing: ^5.11.0
+  path_provider: ^2.1.1
 
   
 dev_dependencies:
