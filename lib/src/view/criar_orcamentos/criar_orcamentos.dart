@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/src/model/orcamento.dart';
 import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
 import 'package:myapp/widget/campo_label.dart';
@@ -16,6 +17,7 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
   final _tipoServicoController = TextEditingController();
   final _materialController = TextEditingController();
   final _observacoesController = TextEditingController();
+  final _quantidadeController = TextEditingController();
 
   @override
   void dispose() {
@@ -23,7 +25,17 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
     _tipoServicoController.dispose();
     _materialController.dispose();
     _observacoesController.dispose();
+    _quantidadeController.dispose();
     super.dispose();
+  }
+
+  void _salvarOrcamento() {
+    Orcamento orcamento = Orcamento(
+        name: _nomeClienteController.text,
+        tipoDeServico: _tipoServicoController.text,
+        material: _materialController.text,
+        quantidade: int.parse(_quantidadeController.text),
+        observacoes: _observacoesController.text);
   }
 
   @override
@@ -37,7 +49,8 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
         builder: (context, constraints) {
           final double horizontalPadding = constraints.maxWidth * 0.05;
           final double verticalSpacing = constraints.maxHeight * 0.02;
-          final double maxWidth = constraints.maxWidth > 600 ? 600 : constraints.maxWidth;
+          final double maxWidth =
+              constraints.maxWidth > 600 ? 600 : constraints.maxWidth;
 
           return Center(
             child: Container(
@@ -62,6 +75,13 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
                     CampoLabel(
                       label: "Material:",
                       placeholder: "digite aqui...",
+                      controller: _quantidadeController,
+                    ),
+                    SizedBox(height: verticalSpacing),
+
+                    CampoLabel(
+                      label: "Quantidade:",
+                      placeholder: "digite aqui...",
                       controller: _materialController,
                     ),
                     SizedBox(height: verticalSpacing),
@@ -84,8 +104,12 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
                       spacing: 24.0, // Espaçamento horizontal
                       runSpacing: 10.0, // Espaçamento vertical
                       alignment: WrapAlignment.center,
-                      children: const [
-                        LinhaIcones(label: "Salvar", icon: Icons.save),
+                      children: [
+                        LinhaIcones(
+                          label: "Salvar",
+                          icon: Icons.save,
+                          onPressed: _salvarOrcamento,
+                        ),
                         LinhaIcones(label: "Cancelar", icon: Icons.cancel),
                       ],
                     ),

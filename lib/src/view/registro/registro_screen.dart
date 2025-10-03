@@ -49,7 +49,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     try {
       if (name.isNotEmpty && password == confirmPassword) {
         await authService.value.register(email: email, password: password);
-      } else if (password != confirmPassword) {
+      } 
+      else if (password != confirmPassword) {
         setState(() {
           errorMessage = 'As senhas não correspondem.';
         });

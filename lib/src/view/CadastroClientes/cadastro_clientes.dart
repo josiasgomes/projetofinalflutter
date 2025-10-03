@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/src/database/clientes_repository.dart';
+import 'package:myapp/src/core/database/clientes_repository.dart';
 import 'package:myapp/src/model/cliente.dart';
 // Certifique-se de que os imports dos seus widgets personalizados estão corretos
 import 'package:myapp/widget/app_bar.dart';
