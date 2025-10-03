@@ -81,8 +81,8 @@ class OrcamentosSalvos extends StatelessWidget {
                       runSpacing: 10.0, // Espaço vertical (quando quebra a linha)
                       children: [
                         LinhaIcones(label: "Salvar", icon: Icons.save),
-                        LinhaIcones(label: "Cancelar", icon: Icons.cancel),
-                        LinhaIcones(label: "Gerar PDF", icon: Icons.picture_as_pdf)
+                        LinhaIcones(label: "Cancelar", icon: Icons.cancel)
+                        //LinhaIcones(label: "Gerar PDF", icon: Icons.picture_as_pdf)
                       ],
                     ),
                     
