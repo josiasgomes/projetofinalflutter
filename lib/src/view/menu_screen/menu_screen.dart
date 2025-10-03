@@ -7,6 +7,7 @@ import 'package:myapp/src/view/clientes/clientes_screen.dart';
 import 'package:myapp/src/view/criar_orcamentos/criar_orcamentos.dart';
 import 'package:myapp/src/view/materiais_e_servicos/materiais_e_servicos.dart';
 import 'package:myapp/src/view/orcamentos_salvos/orcamento_salvos.dart';
+import 'package:myapp/src/view/relatorios/relatorios.dart';
 import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
 
@@ -107,7 +108,10 @@ class MenuScreen extends StatelessWidget {
               icon: Icons.assignment,
               text: 'Relatórios',
               onTap: () {
-                // Ação para Relatórios
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const RelatoriosScreen()),
+                );
               },
             ),
             _buildMenuItem(
