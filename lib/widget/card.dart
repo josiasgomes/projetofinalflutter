@@ -26,8 +26,6 @@ class _CardOrcamentoState extends State<CardOrcamento> {
             height: 150,
             padding: const EdgeInsets.all(16.0),
             child: Column(
-              // **O ERRO ESTAVA AQUI: Faltava 'children: <Widget>['**
-              // Adicionamos a propriedade 'children' para criar a lista de widgets
               children: <Widget>[ 
                 Center(
                   child: ElevatedButton.icon(
