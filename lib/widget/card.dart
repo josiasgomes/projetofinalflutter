@@ -71,9 +71,9 @@ class _CardOrcamentoState extends State<CardOrcamento> {
                         );
                       },
                       icon: const Icon(Icons.picture_as_pdf),
-                      label: const Text('Salvar em PDF'),
+                      label: const Text(''),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: const Color(0xFFAE11BC),
                         foregroundColor: Colors.white,
                         // Padding pode ser ajustado com base na altura/largura da tela
                         padding: EdgeInsets.symmetric(
