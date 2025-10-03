@@ -3,6 +3,7 @@ import 'package:myapp/src/core/theme/app_colors.dart';
 import 'package:myapp/src/core/theme/app_text_style.dart';
 
 class AppButtonStyle {
+
   //Sizes
   static final BorderRadius buttonBorderRadiusStandart = BorderRadius.circular(
     30.0,
@@ -32,5 +33,18 @@ class AppButtonStyle {
                     fillColor: AppColors.buttonBg,
                     filled: true,
                     );          
+  }
+
+  //SnackBars
+  static SnackBar standartSnackBar(String text){
+    return SnackBar(
+      content: Text(text),
+      backgroundColor: AppColors.primary,
+      padding: buttonPaddingStandart,
+      shape: RoundedRectangleBorder(
+        borderRadius: buttonBorderRadiusStandart,
+        side: BorderSide.none,
+      ),
+      );
   }
 }

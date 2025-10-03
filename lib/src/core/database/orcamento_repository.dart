@@ -1,9 +1,11 @@
 import 'dart:async';
-
 import 'package:myapp/src/core/database/firestore.dart';
 import 'package:myapp/src/model/orcamento.dart';
 
 class OrcamentoRepository {
+
+  DataBase dataBase = DataBase();
+  
   Future<void> addOrcamento(Map orcamentoMap) async {
     await DataBase.orcamentosCollection.add(orcamentoMap);
   }

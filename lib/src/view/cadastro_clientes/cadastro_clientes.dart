@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/src/core/database/clientes_repository.dart';
+import 'package:myapp/src/core/theme/app_button_style.dart';
 import 'package:myapp/src/model/cliente.dart';
 // Certifique-se de que os imports dos seus widgets personalizados estão corretos
 import 'package:myapp/widget/app_bar.dart';
@@ -23,6 +24,8 @@ class _CadastroClientesState extends State<CadastroClientes> {
   final _enderecoController = TextEditingController();
   final _cepController = TextEditingController();
   final _cidadeController = TextEditingController();
+
+  ClientesRepository clientesRepository = ClientesRepository();
 
   @override
   void dispose() {
@@ -67,7 +70,7 @@ class _CadastroClientesState extends State<CadastroClientes> {
       // Mostra um feedback de erro caso algo dê errado
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Erro ao salvar cliente: $e')));
+      ).showSnackBar(AppButtonStyle.standartSnackBar("Orçamento salvo com sucesso!"));
     }
   }
 

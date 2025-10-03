@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/src/core/database/orcamento_repository.dart';
 import 'package:myapp/src/model/orcamento.dart';
 import 'package:myapp/widget/app_bar.dart';
 import 'package:myapp/widget/barra_navegacao_principal.dart';
@@ -19,6 +20,8 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
   final _observacoesController = TextEditingController();
   final _quantidadeController = TextEditingController();
 
+  OrcamentoRepository orcamentoRepository = OrcamentoRepository();
+
   @override
   void dispose() {
     _nomeClienteController.dispose();
@@ -29,13 +32,30 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
     super.dispose();
   }
 
-  void _salvarOrcamento() {
+  void _salvarOrcamento() async {
     Orcamento orcamento = Orcamento(
         name: _nomeClienteController.text,
         tipoDeServico: _tipoServicoController.text,
         material: _materialController.text,
         quantidade: int.parse(_quantidadeController.text),
         observacoes: _observacoesController.text);
+
+    try {
+      await orcamentoRepository.addOrcamento(orcamento.toMap());
+
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Orçamento salvo com sucesso!')));
+
+      _nomeClienteController.clear();
+      _tipoServicoController.clear();
+      _materialController.clear();
+      _quantidadeController.clear();
+      _observacoesController.clear();
+      
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Erro ao salvar cliente: $e')));
+    }
   }
 
   @override
@@ -110,7 +130,7 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
                           icon: Icons.save,
                           onPressed: _salvarOrcamento,
                         ),
-                        LinhaIcones(label: "Cancelar", icon: Icons.cancel),
+                        const LinhaIcones(label: "Cancelar", icon: Icons.cancel),
                       ],
                     ),
                     SizedBox(height: verticalSpacing * 2),
