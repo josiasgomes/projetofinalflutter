@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:myapp/src/model/cliente.dart';
 import 'package:myapp/src/core/database/firestore.dart';
 
 class ClientesRepository {
-  Future<void> addCliente(Map clienteMap) async {
+  Future<void> addCliente(Map<String, dynamic> clienteMap) async {
+    clienteMap['data'] = FieldValue.serverTimestamp();
     await DataBase.clientesCollection.add(clienteMap);
   }
 
