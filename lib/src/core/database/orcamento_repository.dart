@@ -3,16 +3,14 @@ import 'package:myapp/src/core/database/firestore.dart';
 import 'package:myapp/src/model/orcamento.dart';
 
 class OrcamentoRepository {
-
   DataBase dataBase = DataBase();
-  
+
   Future<void> addOrcamento(Map orcamentoMap) async {
     await DataBase.orcamentosCollection.add(orcamentoMap);
   }
 
-  Stream<List<Orcamento>> getClienteCollection() {
+  Stream<List<Orcamento>> getOrcamentoMap() {
     return DataBase.orcamentosCollection
-        .orderBy("data", descending: true)
         .snapshots()
         .map((snapshot) {
       return snapshot.docs.map((doc) {

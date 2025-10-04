@@ -33,28 +33,40 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
   }
 
   void _salvarOrcamento() async {
+    final int? quantidade = int.tryParse(_quantidadeController.text);
+
+    if (quantidade == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content:
+              Text('Por favor, insira um valor numérico para a quantidade.'),
+        ),
+      );
+      return;
+    }
+
     Orcamento orcamento = Orcamento(
         name: _nomeClienteController.text,
         tipoDeServico: _tipoServicoController.text,
         material: _materialController.text,
-        quantidade: int.parse(_quantidadeController.text),
+        quantidade: quantidade,
         observacoes: _observacoesController.text);
 
     try {
       await orcamentoRepository.addOrcamento(orcamento.toMap());
 
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Orçamento salvo com sucesso!')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Orçamento salvo com sucesso!')));
 
       _nomeClienteController.clear();
       _tipoServicoController.clear();
       _materialController.clear();
       _quantidadeController.clear();
       _observacoesController.clear();
-      
     } catch (e) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Erro ao salvar cliente: $e')));
+      ).showSnackBar(SnackBar(content: Text('Erro ao salvar orçamento: $e')));
     }
   }
 
@@ -95,14 +107,14 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
                     CampoLabel(
                       label: "Material:",
                       placeholder: "digite aqui...",
-                      controller: _quantidadeController,
+                      controller: _materialController,
                     ),
                     SizedBox(height: verticalSpacing),
 
                     CampoLabel(
                       label: "Quantidade:",
                       placeholder: "digite aqui...",
-                      controller: _materialController,
+                      controller: _quantidadeController,
                     ),
                     SizedBox(height: verticalSpacing),
                     // Campo de observações agora com 5 linhas
@@ -130,7 +142,8 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
                           icon: Icons.save,
                           onPressed: _salvarOrcamento,
                         ),
-                        const LinhaIcones(label: "Cancelar", icon: Icons.cancel),
+                        const LinhaIcones(
+                            label: "Cancelar", icon: Icons.cancel),
                       ],
                     ),
                     SizedBox(height: verticalSpacing * 2),
