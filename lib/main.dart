@@ -18,7 +18,9 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: AuthWrapper());
+    return const MaterialApp(home: AuthWrapper(),
+    initialRoute: ('/home'), 
+    );
 
   }
 }

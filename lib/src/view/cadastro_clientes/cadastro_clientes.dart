@@ -55,7 +55,8 @@ class _CadastroClientesState extends State<CadastroClientes> {
 
       // Mostra um feedback de sucesso
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Cliente salvo com sucesso!')),
+        const SnackBar(content: Text('Cliente salvo com sucesso!'), duration: Duration(seconds: 2),),
+
       );
 
       // Limpa os campos após o salvamento bem-sucedido
@@ -66,6 +67,14 @@ class _CadastroClientesState extends State<CadastroClientes> {
       _enderecoController.clear();
       _cepController.clear();
       _cidadeController.clear();
+
+      await Future.delayed(const Duration(seconds: 2));
+
+      if (!mounted) return; // sai cedo se o widget foi desmontado
+
+      Navigator.pushReplacementNamed(context, '/home');
+
+
     } catch (e) {
       // Mostra um feedback de erro caso algo dê errado
       ScaffoldMessenger.of(

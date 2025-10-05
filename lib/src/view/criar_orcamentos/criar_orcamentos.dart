@@ -56,17 +56,26 @@ class _FazerOrcamentosState extends State<FazerOrcamentos> {
       await orcamentoRepository.addOrcamento(orcamento.toMap());
 
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Orçamento salvo com sucesso!')));
+          const SnackBar(content: Text('Orçamento salvo com sucesso!'))
+      );
 
       _nomeClienteController.clear();
       _tipoServicoController.clear();
       _materialController.clear();
       _quantidadeController.clear();
       _observacoesController.clear();
+
+      await Future.delayed(const Duration(seconds: 2));
+
+      if (!mounted) return; // sai cedo se o widget foi desmontado
+
+      Navigator.pushReplacementNamed(context, '/home');
+
     } catch (e) {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('Erro ao salvar orçamento: $e')));
+      
     }
   }
 
